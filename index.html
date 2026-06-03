@@ -157,17 +157,18 @@ input,select,textarea,button{font-family:var(--sans);}
 .fp-m{background:var(--Pub);color:var(--Pu);border:1px solid var(--Pud);}
 .freq-lbl{font-size:12px;font-weight:600;color:var(--t);}
 .freq-cnt{margin-left:auto;font-size:10px;color:var(--t3);font-family:var(--mono);}
-.act{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1.5px solid var(--t4);border-radius:var(--r8);margin-bottom:5px;cursor:pointer;transition:all .2s;user-select:none;background:var(--s0);}
+.act{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1.5px solid var(--t4);border-radius:var(--r8);margin-bottom:5px;cursor:pointer;transition:all .2s;user-select:none;background:var(--s0);max-width:680px;}
 .act:hover:not(.done){background:var(--s1);border-color:var(--t3);transform:translateX(2px);}
 .act.done{border-color:var(--a);background:linear-gradient(135deg,rgba(255,250,245,.8),rgba(255,242,228,.8));}
 .act-cb{width:21px;height:21px;border-radius:5px;border:1.5px solid var(--t3);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--s0);transition:all .22s;}
 .act.done .act-cb{background:var(--a);border-color:var(--a);box-shadow:0 2px 8px var(--a3);}
 .chk{display:none;width:11px;height:11px;}
 .act.done .chk{display:block;}
-.act-nm{font-size:12.5px;font-weight:500;color:var(--t);flex:1;letter-spacing:-.005em;}
+.act-nm{font-size:12.5px;font-weight:500;color:var(--t);flex:1;letter-spacing:-.005em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px;}
 .act.done .act-nm{color:var(--t2);text-decoration:line-through;text-decoration-color:var(--a4);}
 .act-hint{font-size:10px;color:var(--t3);margin-top:1px;}
-.nin{width:60px;padding:3px 6px;border-radius:var(--r4);border:1px solid var(--t4);background:var(--s1);color:var(--t);font-size:11px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;}
+.nin{width:88px;padding:5px 9px;border-radius:var(--r8);border:1.5px solid var(--t4);background:var(--s0);color:var(--t);font-size:13px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;font-weight:600;}
+.nin:focus{border-color:var(--a);background:var(--s0);}
 .nin:focus{border-color:var(--a);background:var(--s0);}
 .nunit{font-size:10px;color:var(--t3);white-space:nowrap;font-weight:500;}
 .all-done-bar{background:linear-gradient(135deg,var(--a3),rgba(224,122,58,.03));border:1.5px solid var(--a4);border-radius:var(--r8);padding:10px 14px;margin-bottom:13px;display:flex;align-items:center;gap:10px;}
@@ -452,6 +453,35 @@ table.sc tr:hover td{background:var(--a3);}
 /* Two-col helper */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
 @media(max-width:900px){.two-col,.kanban{grid-template-columns:1fr;}}.
+
+/* Streak score pill */
+.streak-score-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--s0);border:1px solid var(--t4);border-radius:var(--r12);margin-bottom:14px;flex-wrap:wrap;}
+.streak-score-pill{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--rfull);background:linear-gradient(140deg,var(--a),var(--a2));color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;box-shadow:0 2px 8px var(--a3);}
+.streak-score-pill:hover{transform:translateY(-1px);box-shadow:0 4px 14px var(--a4);}
+.streak-score-val{font-family:var(--mono);font-size:16px;font-weight:700;}
+.streak-period-btn{padding:4px 10px;border-radius:var(--rfull);border:1px solid var(--t4);background:transparent;font-size:11px;font-weight:500;cursor:pointer;color:var(--t2);transition:all .15s;font-family:var(--sans);}
+.streak-period-btn.on{background:var(--a3);border-color:var(--a4);color:var(--a);font-weight:600;}
+.streak-period-btn:hover:not(.on){border-color:var(--a);color:var(--a);}
+/* Date badge */
+.date-badge{font-size:11px;color:var(--t2);font-family:var(--mono);padding:4px 10px;border-radius:var(--rfull);background:var(--s1);border:1px solid var(--t4);}
+.date-badge.today{border-color:var(--G);color:var(--G);background:var(--Gb);}
+/* Unsaved warning overlay */
+.unsaved-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--Am);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;transform:translateY(100%);transition:transform .3s ease;}
+.unsaved-bar.show{transform:translateY(0);}
+/* Bulk upload area */
+.bulk-drop{border:2px dashed var(--t4);border-radius:var(--r12);padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(--s1);}
+.bulk-drop:hover,.bulk-drop.drag{border-color:var(--a);background:var(--a3);}
+.bulk-drop-icon{font-size:28px;margin-bottom:8px;}
+.bulk-preview{max-height:200px;overflow-y:auto;margin-top:10px;}
+.bulk-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--t4);font-size:11px;}
+/* Nav streak badge */
+.nav-streak-badge{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:var(--rfull);background:linear-gradient(140deg,var(--a),var(--a2));color:#fff;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px var(--a3);}
+.nav-streak-badge:hover{transform:translateY(-1px);}
+/* General template default label */
+.tmpl-default-badge{font-size:9px;padding:2px 7px;border-radius:var(--rfull);background:var(--Gb);color:var(--G);border:1px solid var(--Gd);font-weight:700;margin-left:6px;}
+/* Data persistence indicator */
+.persist-dot{width:7px;height:7px;border-radius:50%;background:var(--G);display:inline-block;margin-right:4px;}
+
 </style>
 </head>
 <body>
@@ -528,6 +558,9 @@ table.sc tr:hover td{background:var(--a3);}
         <button class="btn btn-g btn-sm" onclick="showOnboarding()" title="Switch industry template">🏭 Templates</button>
         <button class="btn btn-g btn-sm" onclick="toggleRP()">👥 View as role</button>
       </div>
+      <div class="nav-streak-badge" id="nav-streak-score" onclick="goTab('inputs',document.querySelectorAll('.ntab')[0])" title="Streak score — today's completion %">
+        🔥 <span id="nav-streak-val">0</span><span style="font-size:9px;opacity:.75">/100</span>
+      </div>
       <div class="user-chip" onclick="toggleTP()">
         <div class="user-av" id="nav-av">?</div>
         <div>
@@ -591,6 +624,13 @@ table.sc tr:hover td{background:var(--a3);}
 </div>
 
 <div class="toast" id="toast-el"></div>
+<div class="unsaved-bar" id="unsaved-bar">
+  <span>⚠️ You have unsaved inputs — closing this tab will lose today's data.</span>
+  <div style="display:flex;gap:8px">
+    <button onclick="saveToLS();document.getElementById('unsaved-bar').classList.remove('show')" style="padding:5px 14px;border-radius:999px;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:600;cursor:pointer">Save now</button>
+    <button onclick="document.getElementById('unsaved-bar').classList.remove('show')" style="padding:5px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:12px;cursor:pointer">Dismiss</button>
+  </div>
+</div>
 
 <div class="toast" id="toast-el"></div>
 <script>
@@ -1937,7 +1977,7 @@ function exportOpsCSV() {
   a.download = 'ekincare-ops-' + new Date().toISOString().slice(0,10) + '.csv'; a.click(); toast('Exported \u2713');
 }
 
-buildSwatches();
+/* init handled by persistence layer */
 </script>
 <script>
 window._OPS_PANELS_HTML = `<!-- ═══ EXEC SCORECARD ═══ -->
@@ -2620,5 +2660,659 @@ window._OPS_PANELS_HTML = `<!-- ═══ EXEC SCORECARD ═══ -->
 <div class="toast" id="toast-el">`;
 
 </script>
+<script>
+
+/* ══════════════════════════════════════════════════════════
+   LOCALSTORAGE PERSISTENCE — fixes issues 13 & 14
+   All data saved to localStorage on every change.
+   Restored on page load. No data loss on refresh.
+══════════════════════════════════════════════════════════ */
+const LS_KEY = 'opstreak_v2';
+
+function saveToLS() {
+  try {
+    const payload = {
+      S,          // all activity logs
+      CU,         // current user
+      cDept, cRole, cLayer, cLDept, ldrView,
+      oD: Object.assign({}, oD),
+      roleMembers, roleMembersList,
+      DB_custom: {}, // custom activities added by user
+      template: window._activeTemplate || 'general',
+      savedAt: new Date().toISOString()
+    };
+    // Save custom activities (only user-added ones flagged)
+    for (const [dept, dd] of Object.entries(DB)) {
+      payload.DB_custom[dept] = {};
+      for (const [role, rd] of Object.entries(dd.roles)) {
+        ['daily','weekly','monthly'].forEach(freq => {
+          const custom = rd[freq].filter(a => a._custom);
+          if (custom.length) {
+            if (!payload.DB_custom[dept][role]) payload.DB_custom[dept][role] = {};
+            payload.DB_custom[dept][role][freq] = custom;
+          }
+        });
+      }
+    }
+    localStorage.setItem(LS_KEY, JSON.stringify(payload));
+    document.getElementById('unsaved-bar')?.classList.remove('show');
+  } catch(e) { console.warn('Save failed:', e); }
+}
+
+function loadFromLS() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const p = JSON.parse(raw);
+    // Restore logs
+    if (p.S) Object.assign(S, p.S);
+    // Restore user
+    if (p.CU) {
+      CU = p.CU;
+      // Restore nav
+      document.getElementById('nav-nm').textContent = CU.name;
+      document.getElementById('nav-av').textContent = CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      document.getElementById('nav-org').textContent = 'Acme Corp';
+      if (CU.type === 'admin') document.getElementById('admin-btn').style.display = 'block';
+    }
+    // Restore state
+    if (p.cDept) cDept = p.cDept;
+    if (p.cRole) cRole = p.cRole;
+    if (p.cLayer) cLayer = p.cLayer;
+    if (p.cLDept) cLDept = p.cLDept;
+    if (p.ldrView) ldrView = p.ldrView;
+    if (p.oD) Object.assign(oD, p.oD);
+    if (p.roleMembers) Object.assign(roleMembers, p.roleMembers);
+    if (p.roleMembersList) Object.assign(roleMembersList, p.roleMembersList);
+    // Restore template
+    if (p.template && p.template !== 'general' && INDUSTRY_TEMPLATES[p.template]) {
+      Object.keys(DB).forEach(k => delete DB[k]);
+      Object.assign(DB, INDUSTRY_TEMPLATES[p.template].departments);
+    }
+    // Restore custom activities
+    if (p.DB_custom) {
+      for (const [dept, dd] of Object.entries(p.DB_custom)) {
+        for (const [role, rd] of Object.entries(dd)) {
+          if (DB[dept]?.roles?.[role]) {
+            ['daily','weekly','monthly'].forEach(freq => {
+              if (rd[freq]?.length) {
+                rd[freq].forEach(act => {
+                  if (!DB[dept].roles[role][freq].find(a=>a.n===act.n)) {
+                    DB[dept].roles[role][freq].push(act);
+                    const lg = S[dk()]?.[dept]?.[role];
+                    if (lg) lg[freq].push(false);
+                  }
+                });
+              }
+            });
+          }
+        }
+      }
+    }
+    return true;
+  } catch(e) { console.warn('Load failed:', e); return false; }
+}
+
+// Auto-save every 30 seconds and on every activity change
+let _autoSaveTimer = null;
+function scheduleAutoSave() {
+  clearTimeout(_autoSaveTimer);
+  _autoSaveTimer = setTimeout(() => { saveToLS(); }, 1500);
+  // Show unsaved bar after 3 seconds of inactivity if not saved
+  document.getElementById('unsaved-bar')?.classList.add('show');
+  setTimeout(() => { document.getElementById('unsaved-bar')?.classList.remove('show'); }, 8000);
+}
+
+// Warn on page close
+window.addEventListener('beforeunload', (e) => {
+  saveToLS(); // save silently on close
+});
+
+/* ══════════════════════════════════════════════════════════
+   STREAK SCORE SYSTEM — issue 13
+   Score = % adherence, selectable period (day/week/month/year)
+══════════════════════════════════════════════════════════ */
+let streakPeriod = 'day';
+
+function calcStreakScore(dept, role, period) {
+  const rd = DB[dept]?.roles?.[role];
+  if (!rd) return 0;
+  const today = new Date();
+  let days = [];
+  if (period === 'day') {
+    days = [today];
+  } else if (period === 'week') {
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today); d.setDate(d.getDate() - i); days.push(d);
+    }
+  } else if (period === 'month') {
+    for (let i = 29; i >= 0; i--) {
+      const d = new Date(today); d.setDate(d.getDate() - i); days.push(d);
+    }
+  } else if (period === 'year') {
+    for (let i = 364; i >= 0; i--) {
+      const d = new Date(today); d.setDate(d.getDate() - i); days.push(d);
+    }
+  }
+  let totalPossible = 0, totalDone = 0;
+  days.forEach(d => {
+    const k = d.toISOString().slice(0,10);
+    const lg = S[k]?.[dept]?.[role];
+    const dailyCount = rd.daily.length;
+    totalPossible += dailyCount;
+    if (lg) totalDone += lg.daily.filter(Boolean).length;
+  });
+  return totalPossible > 0 ? Math.round((totalDone / totalPossible) * 100) : 0;
+}
+
+function updateNavStreakScore() {
+  const el = document.getElementById('nav-streak-val');
+  if (!el || !cDept || !cRole) return;
+  const score = calcStreakScore(cDept, cRole, streakPeriod);
+  el.textContent = score;
+  const badge = document.getElementById('nav-streak-score');
+  if (badge) {
+    badge.style.background = score >= 80
+      ? 'linear-gradient(140deg,var(--G),#0d5c2e)'
+      : score >= 50
+      ? 'linear-gradient(140deg,var(--Am),#7a4208)'
+      : 'linear-gradient(140deg,var(--a),var(--a2))';
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   BULK UPLOAD — issue 11
+   Excel/CSV: Role | Activity | Frequency | Unit | Hint
+══════════════════════════════════════════════════════════ */
+function showBulkUpload() {
+  const depts = Object.keys(DB);
+  const b = `<div class="m-ttl">Bulk upload activities</div>
+    <div class="m-sub">Upload a CSV with columns: Department, Role, Activity, Frequency (daily/weekly/monthly), Unit, Hint. One row per activity. Existing activities are preserved.</div>
+    <div class="bulk-drop" id="bulk-drop" onclick="document.getElementById('bulk-file').click()"
+      ondragover="event.preventDefault();this.classList.add('drag')"
+      ondragleave="this.classList.remove('drag')"
+      ondrop="handleBulkDrop(event)">
+      <div class="bulk-drop-icon">📂</div>
+      <div style="font-size:13px;font-weight:500;color:var(--t)">Drop CSV file here or click to browse</div>
+      <div style="font-size:11px;color:var(--t3);margin-top:4px">CSV format: Department, Role, Activity, Frequency, Unit, Hint</div>
+      <input type="file" id="bulk-file" accept=".csv" style="display:none" onchange="handleBulkFile(event)">
+    </div>
+    <div style="margin-top:12px;padding:10px 12px;background:var(--s1);border-radius:var(--r8);font-size:11px;color:var(--t2)">
+      <strong>Or download template:</strong>
+      <button onclick="downloadBulkTemplate()" style="margin-left:8px;padding:3px 10px;border-radius:999px;border:1px solid var(--a);background:transparent;color:var(--a);font-size:10px;font-weight:600;cursor:pointer">↓ CSV template</button>
+    </div>
+    <div class="bulk-preview" id="bulk-preview"></div>
+    <div class="m-foot">
+      <button class="btn btn-g" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-p" id="bulk-confirm-btn" style="display:none" onclick="confirmBulkUpload()">Import activities</button>
+    </div>`;
+  openModal(b);
+  document.getElementById('modal-box').style.maxWidth = '580px';
+}
+
+let _bulkParsed = [];
+function handleBulkDrop(e) {
+  e.preventDefault();
+  document.getElementById('bulk-drop').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) readBulkFile(file);
+}
+function handleBulkFile(e) {
+  const file = e.target.files[0];
+  if (file) readBulkFile(file);
+}
+function readBulkFile(file) {
+  const reader = new FileReader();
+  reader.onload = ev => parseBulkCSV(ev.target.result);
+  reader.readAsText(file);
+}
+function parseBulkCSV(text) {
+  const lines = text.trim().split('\n').filter(l => l.trim());
+  if (lines.length < 2) return toast('CSV needs at least a header and one row');
+  const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g,''));
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g,''));
+    const row = {};
+    headers.forEach((h, idx) => row[h] = vals[idx] || '');
+    if (row.activity || row['activity name']) rows.push(row);
+  }
+  _bulkParsed = rows;
+  // Show preview
+  const prev = document.getElementById('bulk-preview');
+  if (!prev) return;
+  let html = `<div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--t);margin-bottom:6px">${rows.length} activities found</div>`;
+  html += '<table style="width:100%;border-collapse:collapse;font-size:11px">';
+  html += '<tr style="background:var(--s1)"><th style="padding:5px 8px;text-align:left;border-bottom:1px solid var(--t4)">Dept</th><th style="padding:5px 8px;text-align:left;border-bottom:1px solid var(--t4)">Role</th><th style="padding:5px 8px;text-align:left;border-bottom:1px solid var(--t4)">Activity</th><th style="padding:5px 8px;text-align:left;border-bottom:1px solid var(--t4)">Freq</th></tr>';
+  rows.slice(0,8).forEach(r => {
+    html += `<tr><td style="padding:4px 8px;border-bottom:1px solid var(--t4)">${r.department||r.dept||'—'}</td><td style="padding:4px 8px;border-bottom:1px solid var(--t4)">${r.role||'—'}</td><td style="padding:4px 8px;border-bottom:1px solid var(--t4)">${r.activity||r['activity name']||'—'}</td><td style="padding:4px 8px;border-bottom:1px solid var(--t4)">${r.frequency||r.freq||'daily'}</td></tr>`;
+  });
+  if (rows.length > 8) html += `<tr><td colspan="4" style="padding:5px 8px;color:var(--t3);font-style:italic">...and ${rows.length-8} more</td></tr>`;
+  html += '</table>';
+  prev.innerHTML = html;
+  const btn = document.getElementById('bulk-confirm-btn');
+  if (btn) btn.style.display = 'block';
+}
+function confirmBulkUpload() {
+  let added = 0;
+  _bulkParsed.forEach(row => {
+    const dept = row.department || row.dept || '';
+    const role = row.role || '';
+    const actName = row.activity || row['activity name'] || '';
+    const freq = (row.frequency || row.freq || 'daily').toLowerCase();
+    const unit = row.unit || '';
+    const hint = row.hint || '';
+    if (!dept || !role || !actName) return;
+    if (!DB[dept]) DB[dept] = { icon: '📋', roles: {} };
+    if (!DB[dept].roles[role]) DB[dept].roles[role] = { lvl: 'individual', desc: role, daily: [], weekly: [], monthly: [] };
+    const rd = DB[dept].roles[role];
+    const freqArr = freq === 'weekly' ? 'weekly' : freq === 'monthly' ? 'monthly' : 'daily';
+    if (!rd[freqArr].find(a => a.n === actName)) {
+      rd[freqArr].push({ n: actName, u: unit, h: hint, _custom: true });
+      added++;
+    }
+  });
+  closeModal();
+  saveToLS();
+  buildSB(); renderMain();
+  toast(`✅ ${added} activities imported`);
+}
+function downloadBulkTemplate() {
+  const csv = 'Department,Role,Activity,Frequency,Unit,Hint\nFinance,AP Executive,Process vendor invoices,daily,invoices,Review and post from vendors\nSales,SDR,Cold calls made,daily,calls,Target 40-60 per day\nHR,Recruiter,Resumes screened,daily,resumes,\n';
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'opstreak_bulk_template.csv';
+  a.click();
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX doLogin — NO ONBOARDING ON EVERY LOGIN
+   Only show onboarding if no saved state exists.
+   After first setup, restore from localStorage.
+══════════════════════════════════════════════════════════ */
+// Override doLogin to use localStorage
+const _origDoLogin = doLogin;
+function doLogin(type) {
+  if(type==='member'){
+    const n=document.getElementById('m-name').value.trim();
+    const d=document.getElementById('m-dept').value;
+    const r=document.getElementById('m-role').value;
+    if(!n)return toast('Enter your name');
+    if(!d)return toast('Select department');
+    if(!r)return toast('Select role');
+    CU={name:n,type:'member',dept:d,role:r};
+  } else {
+    const n=document.getElementById('a-name').value.trim();
+    const p=document.getElementById('a-pass').value;
+    if(!n)return toast('Enter your name');
+    if(p!=='admin123'){document.getElementById('a-err').style.display='block';return;}
+    CU={name:n,type:'admin',dept:null,role:null};
+  }
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.visibility='visible';
+  document.getElementById('nav-org').textContent='Acme Corp';
+  document.getElementById('nav-nm').textContent=CU.name;
+  document.getElementById('nav-av').textContent=CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  if(CU.type==='admin'){document.getElementById('admin-btn').style.display='block';oD.Finance=true;cDept='Finance';cRole='AP Executive';}
+  else{cDept=CU.dept;cRole=CU.role;oD[CU.dept]=true;}
+  // Save this user to LS
+  saveToLS();
+  buildSB();renderMain();
+  updateNavStreakScore();
+  toast('Welcome back, '+CU.name+'! 👋');
+  // Only show onboarding if admin AND no template has been set before
+  if(CU.type==='admin'){
+    const saved = localStorage.getItem(LS_KEY);
+    if (!saved || !JSON.parse(saved).template || JSON.parse(saved).template === 'general') {
+      setTimeout(()=>showOnboarding(),600);
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX togAct — save to LS + update leader view + 
+   update streak score on every tick
+══════════════════════════════════════════════════════════ */
+function togAct(d,r,freq,i){
+  const lg=gL(d,r);lg[freq][i]=!lg[freq][i];
+  const el=document.getElementById('ai-'+freq+'-'+i);if(!el)return;
+  el.classList.toggle('done',lg[freq][i]);
+  const cb=el.querySelector('.act-cb');const chk=el.querySelector('.chk');
+  if(lg[freq][i]){
+    cb.style.background='var(--a)';cb.style.borderColor='var(--a)';cb.style.boxShadow='0 2px 8px var(--a3)';if(chk)chk.style.display='block';
+    burst(el);
+    const rd=DB[d].roles[r];
+    const dD=lg.daily.filter(Boolean).length,dT=rd.daily.length;
+    const pct=dT?Math.round(dD/dT*100):0;
+    const C=2*Math.PI*22;
+    const ring=document.querySelector('.ring-wrap circle:last-child');
+    if(ring)ring.setAttribute('stroke-dashoffset',C-(pct/100)*C);
+    const rp=document.querySelector('.ring-pct');if(rp)rp.textContent=pct+'%';
+    const hchip=document.querySelector('.hero-chips .hchip');
+    if(hchip)hchip.innerHTML='Daily <b>'+dD+'/'+dT+'</b>';
+    if(freq==='daily'&&dD===dT&&dT>0)setTimeout(()=>showCeleb(r),350);
+    else toast(['✅ Logged!','🔥 On streak!','💪 Keep going!','⚡ Done!'][Math.floor(Math.random()*4)]);
+  } else {
+    cb.style.background='';cb.style.borderColor='';cb.style.boxShadow='';if(chk)chk.style.display='none';
+  }
+  // Update freq count label
+  const fc=el.closest('.freq-blk')?.querySelector('.freq-cnt');
+  if(fc){const rd=DB[d].roles[r];fc.textContent=lg[freq].filter(Boolean).length+'/'+rd[freq].length;}
+  // Auto-save to localStorage on every tick
+  scheduleAutoSave();
+  // Update streak score in nav
+  updateNavStreakScore();
+  // Update sidebar completion %
+  buildSB();
+}
+
+/* Fix sv to also auto-save */
+function sv(d,r,f,i,v){
+  const lg=gL(d,r);lg.vals[f+'_'+i]=v;
+  scheduleAutoSave();
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX renderInputs — add date display, streak score bar, 
+   period selector. Wrap acts in max-width container.
+══════════════════════════════════════════════════════════ */
+function renderInputs(c){
+  if(!cDept||!cRole){c.innerHTML='<div style="color:var(--t3);font-size:13px;padding:60px 0;text-align:center">Select a role from the sidebar</div>';return;}
+  const rd=DB[cDept]?.roles?.[cRole];if(!rd){c.innerHTML='';return;}
+  const lg=gL(cDept,cRole);
+  const dD=lg.daily.filter(Boolean).length,dT=rd.daily.length;
+  const pct=dT?Math.round(dD/dT*100):0;
+  const C=2*Math.PI*22;const off=C-(pct/100)*C;
+  const allDone=dD===dT&&dT>0;
+
+  // Date display
+  const today=new Date();
+  const dateStr=today.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  let h='';
+
+  // All done banner
+  if(allDone)h+='<div class="all-done-bar"><div class="adb-ico"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--a)">All daily inputs done!</div><div style="font-size:11px;color:var(--t2);margin-top:1px">Streak extended. Outstanding work today.</div></div><button class="btn btn-g btn-sm" onclick="goTab(\'certs\',document.querySelectorAll(\'.ntab\')[7])">View cert 🏆</button></div>';
+
+  // Streak score bar with period selector
+  const score=calcStreakScore(cDept,cRole,streakPeriod);
+  h+='<div class="streak-score-bar">'
+    +'<div style="flex:1;display:flex;align-items:center;gap:10px">'
+    +'<div class="streak-score-pill" onclick="" title="Streak score for selected period">'
+    +'<span>🔥</span><span class="streak-score-val">'+score+'</span><span style="font-size:10px;opacity:.75">/100</span>'
+    +'<span style="font-size:10px;opacity:.75;margin-left:3px">streak score</span>'
+    +'</div>'
+    +'<div style="font-size:11px;color:var(--t2)">% adherence</div>'
+    +'</div>'
+    +'<div style="display:flex;gap:5px;align-items:center">'
+    +['day','week','month','year'].map(p=>'<button class="streak-period-btn'+(streakPeriod===p?' on':'')+'" onclick="streakPeriod=\''+p+'\';renderMain()">'+p.charAt(0).toUpperCase()+p.slice(1)+'</button>').join('')
+    +'<span class="date-badge today">📅 '+dateStr+'</span>'
+    +'</div>'
+    +'</div>';
+
+  // Role hero
+  h+='<div class="role-hero"><div class="ring-wrap"><svg width="54" height="54" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="var(--t4)" stroke-width="4" fill="none"/><circle cx="27" cy="27" r="22" stroke="var(--a)" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+off+'" style="transform:rotate(-90deg);transform-origin:27px 27px;transition:stroke-dashoffset .4s ease"/></svg><div class="ring-pct">'+pct+'%</div></div>';
+  h+='<div style="flex:1"><div class="hero-name">'+roleDisplayHTML(cDept,cRole,15)+'</div><div class="hero-dept">'+cDept+'</div><div class="hero-desc">'+rd.desc+'</div>'
+    +'<div class="hero-chips">'
+    +'<span class="hchip">Daily <b>'+dD+'/'+dT+'</b></span>'
+    +'<span class="hchip">Weekly <b>'+lg.weekly.filter(Boolean).length+'/'+rd.weekly.length+'</b></span>'
+    +'<span class="hchip">Monthly <b>'+lg.monthly.filter(Boolean).length+'/'+rd.monthly.length+'</b></span>'
+    +'<span class="hchip">🔥 '+getStreak()+'d streak</span>'
+    +'</div></div></div>';
+
+  // Activity sections — max-width container for readability
+  h+='<div style="max-width:680px">';
+  [['daily','Daily activities','fp-d'],['weekly','Weekly activities','fp-w'],['monthly','Monthly activities','fp-m']].forEach(([k,lbl,cls])=>{
+    const items=rd[k];if(!items.length)return;
+    const done=lg[k].filter(Boolean).length;
+    h+='<div class="freq-blk"><div class="freq-hd"><span class="fpill '+cls+'">'+k+'</span><span class="freq-lbl">'+lbl+'</span><span class="freq-cnt">'+done+'/'+items.length+'</span></div>';
+    items.forEach((item,i)=>{
+      const isDone=lg[k][i];
+      const val=lg.vals[k+'_'+i]||'';
+      const sr=cRole.replace(/'/g,"\\'");
+      h+='<div class="act'+(isDone?' done':'')+'\" id="ai-'+k+'-'+i+'" onclick="togAct(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+')">'
+        +'<div class="act-cb"><svg class="chk" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+        +'<div style="flex:1;min-width:0"><div class="act-nm" title="'+item.n+'">'+item.n+'</div>'+(item.h?'<div class="act-hint">'+item.h+'</div>':'')+'</div>'
+        +(item.u
+          ? '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" onclick="event.stopPropagation()">'
+            +'<input class="nin" type="number" min="0" placeholder="0" value="'+val+'" '
+            +'oninput="sv(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+',this.value)" '
+            +'onclick="event.stopPropagation()">'
+            +'<span class="nunit" style="font-size:11px;min-width:30px">'+item.u+'</span>'
+            +'</div>'
+          : '')
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  h+='</div>'; // end max-width
+
+  // Add activity row
+  h+='<div class="add-row" style="max-width:680px"><input type="text" id="an" placeholder="Add activity..." style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
+
+  // Streak heatmap
+  h+='<div style="margin-top:20px;max-width:680px"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">🔥 30-day streak heatmap</div><div style="display:flex;gap:3px;flex-wrap:wrap" id="streak-grid"></div></div>';
+
+  c.innerHTML=h;
+  buildStreakGrid();
+  updateNavStreakScore();
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX addAct — mark as custom so it's saved to LS
+══════════════════════════════════════════════════════════ */
+function addAct(){
+  if(!cDept||!cRole)return;
+  const n=document.getElementById('an').value.trim();
+  if(!n)return toast('Enter activity name');
+  const u=document.getElementById('au').value.trim();
+  const f=document.getElementById('af').value;
+  DB[cDept].roles[cRole][f].push({n,u,h:'',_custom:true});
+  const lg=gL(cDept,cRole);lg[f].push(false);
+  document.getElementById('an').value='';
+  document.getElementById('au').value='';
+  saveToLS();
+  renderMain();
+  toast('Activity added!');
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX goTab — rebuild sidebar properly for every tab
+══════════════════════════════════════════════════════════ */
+function goTab(id,el){
+  cTab=id;
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('on'));
+  if(el)el.classList.add('on');
+  buildSB();
+  renderMain();
+  updateNavStreakScore();
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX renderLeaders — live data from S state
+   Activity view shows real logged values not synthetic
+══════════════════════════════════════════════════════════ */
+function renderLeaders(c){
+  if(ldrView==='activity'){renderActivityLeaderView(c);return;}
+  const lvMap={'CEO / Board':['ceo'],'Senior Managers':['senior'],'Team Leads':['lead'],'Individual Contributors':['individual']};
+  const filt=TEAM.filter(m=>(cLDept==='All'||m.dept===cLDept)&&lvMap[cLayer]?.includes(m.lvl));
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const avgS=filt.length?Math.round(filt.reduce((a,m)=>a+m.streak,0)/filt.length):0;
+  const wkP=filt.length?Math.round(filt.reduce((a,m)=>a+(m.d.reduce((s,v)=>s+v,0)/(m.d.length*5)),0)/filt.length*100):0;
+
+  let h='<div class="pg-hd"><div><div class="pg-title">'+cLayer+'</div><div class="pg-sub">'+(cLDept==='All'?'All departments':cLDept)+' · '+filt.length+' members · People view</div></div>'
+    +'<div style="display:flex;gap:7px"><button class="btn btn-p btn-sm" onclick="ldrView=\'activity\';buildSB();renderMain()">📋 Activity view with numbers</button></div></div>';
+
+  // Live completion from real S data where available
+  const todayKey=dk();
+  h+='<div class="mg"><div class="mc hi"><div class="mv">'+filt.length+'</div><div class="ml">Members</div></div>'
+    +'<div class="mc"><div class="mv">'+avgS+'</div><div class="ml">Avg streak (days)</div></div>'
+    +'<div class="mc"><div class="mv">'+wkP+'%</div><div class="ml">This week</div></div>'
+    +'<div class="mc"><div class="mv">'+filt.filter(m=>m.streak>=7).length+'</div><div class="ml">7+ day streaks</div></div></div>';
+
+  // Weekly heatmap with actual data
+  h+='<div class="hmap"><div class="hmap-ttl">Weekly activity heatmap — last 7 days <span class="hmap-sub">'+filt.length+' members</span></div>';
+  h+='<div style="display:grid;grid-template-columns:72px repeat(7,1fr);gap:3px;font-size:10px;color:var(--t3)"><div></div>'+days.map(d=>'<div style="text-align:center;padding:2px 0;font-weight:500">'+d+'</div>').join('');
+  filt.slice(0,10).forEach(m=>{
+    h+='<div style="display:flex;align-items:center;font-size:10px;color:var(--t2);overflow:hidden;padding-right:3px">'+m.name.split(' ')[0]+'</div>';
+    m.d.forEach((v,di)=>{
+      // Try real data first
+      const dayDate=new Date();dayDate.setDate(dayDate.getDate()-(6-di));
+      const dayKey=dayDate.toISOString().slice(0,10);
+      const realLg=S[dayKey]?.[m.dept]?.[m.role];
+      const realTot=DB[m.dept]?.roles?.[m.role]?.daily?.length||1;
+      const realDone=realLg?realLg.daily.filter(Boolean).length:0;
+      const useVal=realLg?(realDone/realTot*5):v;
+      const lv=useVal>=5?4:useVal>=3?3:useVal>=2?2:useVal>0?1:0;
+      const bg=lv===0?'var(--s2)':lv===1?'rgba(224,122,58,.16)':lv===2?'rgba(224,122,58,.38)':lv===3?'rgba(224,122,58,.66)':'var(--a)';
+      const isToday=di===6;
+      h+='<div style="height:20px;border-radius:3px;background:'+bg+(isToday?';outline:2px solid var(--a);outline-offset:1px':'')+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:var(--mono);color:'+(lv>=3?'#fff':'var(--t3)')+'" title="'+m.name+' — '+days[di]+': '+Math.round(useVal)+' inputs">'+(useVal>0?Math.round(useVal):'')+'</div>';
+    });
+  });
+  h+='</div><div class="hleg">Less <div class="hleg-c" style="background:var(--s2)"></div><div class="hleg-c" style="background:rgba(224,122,58,.38)"></div><div class="hleg-c" style="background:var(--a)"></div> More · Numbers = daily input count</div></div>';
+
+  // 30-day heatmap
+  h+='<div class="hmap"><div class="hmap-ttl">30-day streak heatmap</div>';
+  filt.slice(0,10).forEach(m=>{
+    h+='<div style="display:flex;align-items:center;gap:5px;margin-bottom:5px"><div style="width:64px;font-size:10px;color:var(--t2);overflow:hidden;flex-shrink:0">'+m.name.split(' ')[0]+'</div><div style="display:flex;gap:2px">';
+    for(let i=29;i>=0;i--){
+      const d2=new Date();d2.setDate(d2.getDate()-i);
+      const k2=d2.toISOString().slice(0,10);
+      const realLg2=S[k2]?.[m.dept]?.[m.role];
+      const realTot2=DB[m.dept]?.roles?.[m.role]?.daily?.length||1;
+      let lv2=0;
+      if(realLg2){const dn2=realLg2.daily.filter(Boolean).length;const p2=dn2/realTot2;lv2=p2>.75?4:p2>.5?3:p2>.25?2:p2>0?1:0;}
+      else if(i<m.streak)lv2=Math.min(4,1+Math.floor((m.streak-i)/9));
+      const bg2=lv2===0?'var(--s2)':lv2===1?'rgba(224,122,58,.16)':lv2===2?'rgba(224,122,58,.38)':lv2===3?'rgba(224,122,58,.66)':'var(--a)';
+      h+='<div style="width:12px;height:12px;border-radius:2px;background:'+bg2+'" title="'+k2+'"></div>';
+    }
+    h+='</div></div>';
+  });
+  h+='<div class="hleg">Less <div class="hleg-c" style="background:var(--s2)"></div><div class="hleg-c" style="background:rgba(224,122,58,.38)"></div><div class="hleg-c" style="background:var(--a)"></div> More</div></div>';
+
+  // Team table with live data
+  if(filt.length){
+    h+='<div style="background:var(--s0);border:1px solid var(--t4);border-radius:10px;overflow:hidden"><div style="padding:9px 13px;border-bottom:1px solid var(--t4);font-size:12px;font-weight:600;color:var(--t)">Team members — today\'s completion</div>'
+      +'<table class="tt"><thead><tr><th>Member</th><th>Role · Dept</th><th>Streak</th><th>Today</th><th>This week</th><th>Level</th></tr></thead><tbody>';
+    filt.forEach(m=>{
+      const init=m.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+      const realLgToday=S[todayKey]?.[m.dept]?.[m.role];
+      const realTotToday=DB[m.dept]?.roles?.[m.role]?.daily?.length||5;
+      const realDoneToday=realLgToday?realLgToday.daily.filter(Boolean).length:0;
+      const todayPct=realLgToday?Math.round(realDoneToday/realTotToday*100):(m.d[6]?Math.round(m.d[6]/5*100):0);
+      const wkT=m.d.reduce((a,v)=>a+v,0);const wkM=m.d.length*5;const wkPct=wkM?Math.round(wkT/wkM*100):0;
+      h+='<tr><td><div style="display:flex;align-items:center;gap:7px"><div class="av">'+init+'</div>'+m.name+'</div></td>'
+        +'<td style="color:var(--t2);font-size:11px">'+m.role+'<br><span style="color:var(--t3)">'+m.dept+'</span></td>'
+        +'<td><div style="display:flex;align-items:center;gap:4px"><div style="display:flex;gap:2px">'+[...Array(7)].map((_,ii)=>'<div style="width:7px;height:7px;border-radius:1px;background:'+(ii<Math.min(7,m.streak)?'var(--a)':'var(--s2)')+'"></div>').join('')+'</div><span style="font-size:11px;font-family:var(--mono)">'+m.streak+'d</span></div></td>'
+        +'<td><div style="display:flex;align-items:center;gap:5px"><div class="pb"><div class="pbf" style="width:'+todayPct+'%"></div></div><span style="font-size:11px;font-family:var(--mono);color:'+(todayPct>=80?'var(--G)':todayPct>=50?'var(--Am)':'var(--R)')+'">'+todayPct+'%</span></div></td>'
+        +'<td><div style="display:flex;align-items:center;gap:4px"><div class="pb"><div class="pbf" style="width:'+wkPct+'%"></div></div><span style="font-size:11px;font-family:var(--mono)">'+wkPct+'%</span></div></td>'
+        +'<td><span class="lvp lp-'+m.lvl+'">'+m.lvl+'</span></td></tr>';
+    });
+    h+='</tbody></table></div>';
+  }
+  c.innerHTML=h;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIX showOnboarding — General template as DEFAULT,
+   others as options. No auto-trigger on every login.
+══════════════════════════════════════════════════════════ */
+function showOnboarding() {
+  window._activeTemplate = window._activeTemplate || 'general';
+  const cards = Object.entries(INDUSTRY_TEMPLATES).map(([key, tmpl]) =>
+    `<div class="tmpl-card" id="tc-${key}" onclick="selectTemplate('${key}')"
+      style="border:1.5px solid var(--t4);border-radius:10px;padding:14px 15px;cursor:pointer;transition:all .18s;background:var(--s0)">
+      <div style="font-size:22px;margin-bottom:7px">${tmpl.icon}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--t)">${tmpl.name}</div>
+      <div style="font-size:11px;color:var(--t2);margin-top:3px;line-height:1.5">${tmpl.desc}</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:7px;font-family:var(--mono)">${Object.keys(tmpl.departments).length} departments</div>
+    </div>`
+  ).join('');
+
+  const html = `
+    <div class="m-ttl">Industry template setup</div>
+    <div class="m-sub">
+      <strong>General template is active by default</strong> — Finance, Sales, HR, Engineering, Marketing, Operations.
+      Switch to an industry-specific template if your company fits one more precisely.
+    </div>
+    <div style="padding:10px 14px;background:var(--Gb);border:1px solid var(--Gd);border-radius:var(--r8);margin-bottom:16px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">✅</span>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--G)">General template (active)</div>
+        <div style="font-size:11px;color:var(--G);opacity:.8">Finance · Sales · HR · Engineering · Marketing · Operations</div>
+      </div>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="applyTemplate(null)">Keep this →</button>
+    </div>
+    <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Or switch to industry-specific:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:16px">${cards}</div>
+    <div class="m-foot">
+      <div id="tmpl-sel-label" style="font-size:12px;color:var(--t3);flex:1"></div>
+      <button class="btn btn-g" onclick="closeModal()">Skip</button>
+      <button class="btn btn-p" id="apply-tmpl-btn" style="display:none" onclick="applySelectedTemplate()">Apply template →</button>
+    </div>`;
+  openModal(html);
+  const box = document.getElementById('modal-box');
+  if (box) box.style.maxWidth = '640px';
+}
+
+function applyTemplate(key) {
+  if (key && INDUSTRY_TEMPLATES[key]) {
+    const tmpl = INDUSTRY_TEMPLATES[key];
+    Object.keys(DB).forEach(k => delete DB[k]);
+    Object.assign(DB, tmpl.departments);
+    window._activeTemplate = key;
+    toast('Template applied: ' + tmpl.name + ' 🎉');
+  } else {
+    window._activeTemplate = 'general';
+    toast('Using general template');
+  }
+  closeModal();
+  const box = document.getElementById('modal-box');
+  if (box) box.style.maxWidth = '';
+  Object.keys(oD).forEach(k => delete oD[k]);
+  const firstDept = Object.keys(DB)[0];
+  if (firstDept) { oD[firstDept] = true; cDept = firstDept; cRole = Object.keys(DB[firstDept].roles)[0]; }
+  saveToLS();
+  buildSB(); renderMain();
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAGE INIT — restore from localStorage on load
+══════════════════════════════════════════════════════════ */
+(function init() {
+  buildSwatches();
+  const restored = loadFromLS();
+  if (restored && CU) {
+    // User was logged in before — restore session
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.visibility = 'visible';
+    document.getElementById('nav-org').textContent = 'Acme Corp';
+    document.getElementById('nav-nm').textContent = CU.name;
+    document.getElementById('nav-av').textContent = CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    if (CU.type === 'admin') document.getElementById('admin-btn').style.display = 'block';
+    if (!cDept || !cRole) {
+      const firstDept = Object.keys(DB)[0];
+      if (firstDept) { oD[firstDept]=true; cDept=firstDept; cRole=Object.keys(DB[firstDept].roles)[0]; }
+    }
+    buildSB(); renderMain();
+    updateNavStreakScore();
+    toast('Session restored ✓ — welcome back, ' + CU.name + '!');
+  }
+  // Auto-save every 60 seconds
+  setInterval(saveToLS, 60000);
+  // Add bulk upload button to nav for admin
+  const adminBtn = document.getElementById('admin-btn');
+  if (adminBtn) {
+    const bulkBtn = document.createElement('button');
+    bulkBtn.className = 'btn btn-g btn-sm';
+    bulkBtn.textContent = '📥 Bulk upload';
+    bulkBtn.onclick = showBulkUpload;
+    adminBtn.appendChild(bulkBtn);
+  }
+})();
+
+
+</script>
+
 </body>
 </html>
