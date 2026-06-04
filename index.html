@@ -176,7 +176,7 @@ input,select,textarea{
 .act-nm{font-size:12.5px;font-weight:500;color:var(--t);flex:1;letter-spacing:-.005em;min-width:0;line-height:1.4;}
 .act.done .act-nm{color:var(--t2);text-decoration:line-through;text-decoration-color:var(--a4);}
 .act-hint{font-size:10px;color:var(--t3);margin-top:1px;}
-.nin{width:88px;padding:5px 9px;border-radius:var(--r8);border:1.5px solid var(--t4);background:var(--s0);color:var(--t);font-size:13px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;font-weight:600;pointer-events:auto !important;user-select:text !important;-webkit-user-select:text !important;touch-action:auto !important;}
+.nin{width:104px;padding:6px 10px;border-radius:var(--r8);border:1.5px solid var(--t4);background:var(--s0);color:var(--t);font-size:13px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;font-weight:600;pointer-events:auto !important;user-select:text !important;-webkit-user-select:text !important;touch-action:auto !important;}
 .nin:focus{border-color:var(--a);background:var(--s0);}
 .nin:focus{border-color:var(--a);background:var(--s0);}
 .nunit{font-size:10px;color:var(--t3);white-space:nowrap;font-weight:500;}
@@ -543,7 +543,7 @@ table.sc tr:hover td{background:var(--a3);}
   /* Activity items */
   .act{padding:9px 11px;gap:7px;}
   .act-nm{font-size:12px;}
-  .nin{width:70px;font-size:12px;padding:4px 7px;}
+  .nin{width:88px;font-size:12px;padding:5px 8px;}
   /* Cards */
   .mg{grid-template-columns:1fr 1fr;gap:8px;}
   .mv{font-size:18px;}
@@ -1125,51 +1125,46 @@ function renderMain(){
 function renderInputs(c){
   if(!cDept||!cRole){c.innerHTML='<div style="color:var(--t3);font-size:13px;padding:60px 0;text-align:center">Select a role from the sidebar</div>';return;}
   const rd=DB[cDept]?.roles?.[cRole];if(!rd){c.innerHTML='';return;}
-  const lg=gL(cDept,cRole);const dD=lg.daily.filter(Boolean).length,dT=rd.daily.length;
-  const pct=dT?Math.round(dD/dT*100):0;const C=2*Math.PI*22;const off=C-(pct/100)*C;const allDone=dD===dT&&dT>0;
+  const lg=gL(cDept,cRole);
+  const dD=lg.daily.filter(Boolean).length,dT=rd.daily.length;
+  const pct=dT?Math.round(dD/dT*100):0;
+  const C=2*Math.PI*22;const off=C-(pct/100)*C;
+  const allDone=dD===dT&&dT>0;
+  const sr=cRole.replace(/'/g,"\\'");
   let h='';
-  if(allDone)h+='<div class="all-done-bar"><div class="adb-ico"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--a)">All daily inputs done!</div><div style="font-size:11px;color:var(--t2);margin-top:1px">Streak extended. Outstanding work.</div></div><button class="btn btn-g btn-sm" onclick="goTab(\'certs\',document.querySelectorAll(\'.ntab\')[7])">View cert 🏆</button></div>';
+  if(allDone)h+='<div class="all-done-bar"><div class="adb-ico"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:var(--a)">All daily inputs done!</div><div style="font-size:11px;color:var(--t2);margin-top:1px">Streak extended.</div></div><button class="btn btn-g btn-sm" onclick="goTab(\'certs\',document.querySelectorAll(\'.ntab\')[7])">View cert 🏆</button></div>';
   h+='<div class="role-hero"><div class="ring-wrap"><svg width="54" height="54" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="var(--t4)" stroke-width="4" fill="none"/><circle cx="27" cy="27" r="22" stroke="var(--a)" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+off+'" style="transform:rotate(-90deg);transform-origin:27px 27px;transition:stroke-dashoffset .4s ease"/></svg><div class="ring-pct">'+pct+'%</div></div>';
-  h+='<div style="flex:1"><div class="hero-name">'+roleDisplayHTML(cDept,cRole,15)+'</div><div class="hero-dept">'+cDept+'</div><div class="hero-desc">'+rd.desc+'</div><div class="hero-chips"><span class="hchip">Daily <b>'+dD+'/'+dT+'</b></span><span class="hchip">Weekly <b>'+lg.weekly.filter(Boolean).length+'/'+rd.weekly.length+'</b></span><span class="hchip">Monthly <b>'+lg.monthly.filter(Boolean).length+'/'+rd.monthly.length+'</b></span><span class="hchip">Level: <b>'+rd.lvl+'</b></span></div></div></div>';
-  [['daily','Daily activities','fp-d'],['weekly','Weekly activities','fp-w'],['monthly','Monthly activities','fp-m']].forEach(([k,lbl,cls])=>{
-    const items=rd[k];if(!items.length)return;const done=lg[k].filter(Boolean).length;
-    h+='<div class="freq-blk"><div class="freq-hd"><span class="fpill '+cls+'">'+k+'</span><span class="freq-lbl">'+lbl+'</span><span class="freq-cnt">'+done+'/'+items.length+'</span></div>';
-    items.forEach((item,i)=>{const isDone=lg[k][i];const val=lg.vals[k+'_'+i]||'';const sr=cRole.replace(/'/g,"\\'");
+  h+='<div style="flex:1"><div class="hero-name">'+roleDisplayHTML(cDept,cRole,15)+'</div><div class="hero-dept">'+cDept+'</div><div class="hero-desc">'+rd.desc+'</div><div class="hero-chips"><span class="hchip">Daily <b>'+dD+'/'+dT+'</b></span><span class="hchip">Weekly <b>'+lg.weekly.filter(Boolean).length+'/'+rd.weekly.length+'</b></span><span class="hchip">Monthly <b>'+lg.monthly.filter(Boolean).length+'/'+rd.monthly.length+'</b></span><span class="hchip">🔥 '+getStreak()+'d</span></div></div></div>';
+  [['daily','Daily','fp-d'],['weekly','Weekly','fp-w'],['monthly','Monthly','fp-m']].forEach(([k,lbl,cls])=>{
+    const items=rd[k];if(!items.length)return;
+    const done=lg[k].filter(Boolean).length;
+    h+='<div class="freq-blk"><div class="freq-hd"><span class="fpill '+cls+'">'+k+'</span><span class="freq-lbl">'+lbl+' activities</span><span class="freq-cnt">'+done+'/'+items.length+'</span></div>';
+    items.forEach((item,i)=>{
+      const isDone=!!lg[k][i];
+      const numVal=lg.vals[k+'_'+i]||'';
+      const unitVal=lg.vals[k+'_unit_'+i]||(item.u||'');
       h+='<div class="act'+(isDone?' done':'')+'" id="ai-'+k+'-'+i+'" onclick="togAct(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+')">'
-        +'<div class="act-cb"><svg class="chk" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
-        +'<div style="flex:1"><div class="act-nm">'+item.n+'</div>'+(item.h?'<div class="act-hint">'+item.h+'</div>':'')+'</div>'
-        +(item.u?'<div style="display:flex;align-items:center;gap:5px;flex-shrink:0" onclick="event.stopPropagation()"><input class="nin" type="number" min="0" placeholder="0" value="'+val+'" oninput="sv(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+',this.value)"><span class="nunit">'+item.u+'</span></div>':'')
-        +'</div>';
+       +'<div class="act-cb"><svg class="chk" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
+       +'<div style="flex:1;min-width:0"><div class="act-nm" id="anm-'+k+'-'+i+'">'+item.n+'</div>'+(item.h?'<div class="act-hint">'+item.h+'</div>':'')+'</div>'
+       +'<div class="nin-wrap" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()">'
+       +'<input class="nin" type="number" min="0" placeholder="0" value="'+numVal+'" oninput="sv(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+',this.value)" onclick="event.stopPropagation()" onfocus="this.select()">'
+       +'<input class="nunit-edit" type="text" value="'+unitVal+'" placeholder="unit" style="width:52px;padding:4px 6px;border:1px solid var(--t4);border-radius:5px;font-size:11px;color:var(--t2);background:var(--s1);outline:none;font-family:var(--sans)" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" oninput="sv(\''+cDept+'\',\''+sr+'\',\''+k+'_unit\','+i+',this.value)" onfocus="this.select()">'
+       +'</div>'
+       +'<div class="act-actions" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()">'
+       +'<button class="act-action-btn edit" onclick="startEditAct(\''+k+'\','+i+')" title="Edit name">✎</button>'
+       +'<button class="act-action-btn del" onclick="deleteAct(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+')" title="Delete">✕</button>'
+       +'</div>'
+       +'</div>';
     });
     h+='</div>';
   });
-  h+='<div class="add-row"><input type="text" id="an" placeholder="Add activity..." onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
+  h+='<div class="add-row"><input type="text" id="an" placeholder="New activity name..." onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="flex:1;min-width:120px"><input type="text" id="au" placeholder="unit" style="width:65px" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()"><select id="af" style="padding:5px 6px"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-p btn-sm" onclick="addAct()">+ Add</button></div>';
   h+='<div style="margin-top:18px"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">🔥 30-day streak</div><div style="display:flex;gap:3px;flex-wrap:wrap" id="streak-grid"></div></div>';
   c.innerHTML=h;
   buildStreakGrid();
 }
 
-function togAct(d,r,freq,i){
-  const lg=gL(d,r);lg[freq][i]=!lg[freq][i];
-  const el=document.getElementById('ai-'+freq+'-'+i);if(!el)return;
-  el.classList.toggle('done',lg[freq][i]);
-  const cb=el.querySelector('.act-cb');const chk=el.querySelector('.chk');
-  if(lg[freq][i]){
-    cb.style.background='var(--a)';cb.style.borderColor='var(--a)';cb.style.boxShadow='0 2px 8px var(--a3)';if(chk)chk.style.display='block';
-    burst(el);
-    const rd=DB[d].roles[r];const dD=lg.daily.filter(Boolean).length,dT=rd.daily.length;
-    const pct=dT?Math.round(dD/dT*100):0;const C=2*Math.PI*22;
-    const ring=document.querySelector('.ring-wrap circle:last-child');if(ring)ring.setAttribute('stroke-dashoffset',C-(pct/100)*C);
-    const rp=document.querySelector('.ring-pct');if(rp)rp.textContent=pct+'%';
-    const hchip=document.querySelector('.hero-chips .hchip');if(hchip)hchip.innerHTML='Daily <b>'+dD+'/'+dT+'</b>';
-    if(freq==='daily'&&dD===dT&&dT>0)setTimeout(()=>showCeleb(r),350);
-    else toast(['✅ Logged!','🔥 On streak!','💪 Keep going!','⚡ Done!'][Math.floor(Math.random()*4)]);
-  } else {cb.style.background='';cb.style.borderColor='';cb.style.boxShadow='';if(chk)chk.style.display='none';}
-  const fc=el.closest('.freq-blk')?.querySelector('.freq-cnt');if(fc){const rd=DB[d].roles[r];fc.textContent=lg[freq].filter(Boolean).length+'/'+rd[freq].length;}
-  buildSB();
-}
-function sv(d,r,f,i,v){const lg=gL(d,r);lg.vals[f+'_'+i]=v;}
-function addAct(){if(!cDept||!cRole)return;const n=document.getElementById('an').value.trim();if(!n)return toast('Enter activity name');const u=document.getElementById('au').value.trim();const f=document.getElementById('af').value;DB[cDept].roles[cRole][f].push({n,u,h:''});const lg=gL(cDept,cRole);lg[f].push(false);document.getElementById('an').value='';document.getElementById('au').value='';renderMain();toast('Activity added!');}
+
 function buildStreakGrid(){const el=document.getElementById('streak-grid');if(!el)return;const today=new Date();let h='';for(let i=29;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);const lg=S[k]?.[cDept]?.[cRole];let lv=0;if(lg){const dn=lg.daily.filter(Boolean).length;const tot=DB[cDept]?.roles?.[cRole]?.daily?.length||1;const p=dn/tot;lv=p>.75?4:p>.5?3:p>.25?2:p>0?1:0;}const bg=lv===0?'var(--s2)':lv===1?'var(--hl1)':lv===2?'var(--hl2)':lv===3?'var(--hl3)':'var(--a)';h+='<div style="width:18px;height:18px;border-radius:3px;background:'+bg+';transition:background .3s" title="'+k+'"></div>';}el.innerHTML=h;}
 
 /* ─── LEADERS ─── */
@@ -3540,6 +3535,348 @@ function mTab(id) {
   toggle(mq);
 })();
 
+
+/* ══ EDIT / DELETE ACTIVITY ══ */
+function startEditAct(freq, i) {
+  const nmEl = document.getElementById('anm-'+freq+'-'+i);
+  if(!nmEl) return;
+  const current = nmEl.textContent;
+  nmEl.innerHTML = '<input class="act-edit-input" id="aei-'+freq+'-'+i+'" type="text" value="'+current.replace(/'/g,"&#39;")+'" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" onkeydown="if(event.key===\'Enter\')saveEditAct(\''+freq+'\','+i+');if(event.key===\'Escape\')renderMain();">'
+    +'<button onclick="event.stopPropagation();saveEditAct(\''+freq+'\','+i+')" style="margin-left:5px;padding:3px 8px;border-radius:4px;border:none;background:var(--a);color:#fff;font-size:10px;font-weight:600;cursor:pointer">Save</button>'
+    +'<button onclick="event.stopPropagation();renderMain()" style="margin-left:3px;padding:3px 8px;border-radius:4px;border:1px solid var(--t4);background:transparent;color:var(--t2);font-size:10px;cursor:pointer">Cancel</button>';
+  const input = document.getElementById('aei-'+freq+'-'+i);
+  if(input){ input.focus(); input.select(); }
+}
+
+function saveEditAct(freq, i) {
+  const input = document.getElementById('aei-'+freq+'-'+i);
+  if(!input) return;
+  const newName = input.value.trim();
+  if(!newName) return toast('Activity name cannot be empty');
+  if(!DB[cDept]?.roles?.[cRole]?.[freq]?.[i]) return;
+  DB[cDept].roles[cRole][freq][i].n = newName;
+  if(typeof saveToLS === 'function') saveToLS();
+  renderMain();
+  toast('Activity updated ✓');
+}
+
+function deleteAct(dept, role, freq, i) {
+  const rd = DB[dept]?.roles?.[role];
+  if(!rd) return;
+  const actName = rd[freq][i]?.n || 'this activity';
+  if(!confirm('Delete "'+actName+'"?')) return;
+  rd[freq].splice(i, 1);
+  // Fix logs — remove the entry at position i
+  const today = typeof dk === 'function' ? dk() : new Date().toISOString().slice(0,10);
+  const lg = S[today]?.[dept]?.[role];
+  if(lg?.[freq]) lg[freq].splice(i, 1);
+  // Clean up vals
+  const newVals = {};
+  Object.entries(lg?.vals||{}).forEach(([k,v]) => {
+    const parts = k.split('_');
+    const vFreq = parts[0]; const vIdx = parseInt(parts[parts.length-1]);
+    if(vFreq === freq && vIdx === i) return; // skip deleted
+    if(vFreq === freq && vIdx > i) {
+      // Shift down
+      parts[parts.length-1] = String(vIdx-1);
+      newVals[parts.join('_')] = v;
+    } else { newVals[k] = v; }
+  });
+  if(lg) lg.vals = newVals;
+  if(typeof saveToLS === 'function') saveToLS();
+  renderMain();
+  toast('Activity deleted');
+}
+
+/* ══ LEADER VIEW STATE ══ */
+let ldrFunc = 'All';   // selected function filter
+let ldrSubView = 'person'; // 'person' or 'heading'
+
+/* ══ REBUILD buildSB for leaders — dynamic functions from DB ══ */
+function buildSB() {
+  const sb = document.getElementById('sidebar');
+  if(!sb) return;
+  if(cTab === 'leaders') {
+    sb.innerHTML = '';
+    // View type
+    const vt = document.createElement('div'); vt.innerHTML = '<div class="sb-lbl">View type</div>';
+    sb.appendChild(vt);
+    [['people','👥 People'],['activity','📋 Activity']].forEach(([v,lbl])=>{
+      const b=document.createElement('div');b.className='sb-btn'+(ldrView===v?' on':'');
+      b.innerHTML='<span class="sb-nm">'+lbl+'</span>';
+      b.onclick=()=>{ldrView=v;buildSB();renderMain();};sb.appendChild(b);
+    });
+    // Sub-view for people mode
+    if(ldrView==='people'){
+      const sv2 = document.createElement('div'); sv2.innerHTML = '<div class="sb-sep"></div><div class="sb-lbl">View by</div>';
+      sb.appendChild(sv2);
+      [['person','👤 Person'],['heading','📋 Heading / Activity']].forEach(([v,lbl])=>{
+        const b=document.createElement('div');b.className='sb-btn'+(ldrSubView===v?' on':'');
+        b.innerHTML='<span class="sb-nm">'+lbl+'</span>';
+        b.onclick=()=>{ldrSubView=v;buildSB();renderMain();};sb.appendChild(b);
+      });
+    }
+    // Level
+    const lvl = document.createElement('div'); lvl.innerHTML = '<div class="sb-sep"></div><div class="sb-lbl">Level</div>';
+    sb.appendChild(lvl);
+    ['CEO / Board','Senior Managers','Team Leads','Individual Contributors'].forEach(l=>{
+      const b=document.createElement('div');b.className='sb-btn'+(cLayer===l?' on':'');
+      b.innerHTML='<span class="sb-nm">'+l+'</span>';
+      b.onclick=()=>{cLayer=l;buildSB();renderMain();};sb.appendChild(b);
+    });
+    // Function — built from DB keys dynamically
+    const fn = document.createElement('div'); fn.innerHTML = '<div class="sb-sep"></div><div class="sb-lbl">Function</div>';
+    sb.appendChild(fn);
+    const depts = ['All', ...Object.keys(DB)];
+    depts.forEach(d=>{
+      const b=document.createElement('div');b.className='sb-btn'+(ldrFunc===d?' on':'');
+      const icon = d==='All'?'🌐':(DB[d]?.icon||'📋');
+      b.innerHTML='<span class="sb-ico">'+icon+'</span><span class="sb-nm">'+d+'</span>';
+      b.onclick=()=>{ldrFunc=d;cLDept=d==='All'?'All':d;buildSB();renderMain();};sb.appendChild(b);
+    });
+    return;
+  }
+  // For all other tabs — handled by original function above
+  _buildSBOther();
+}
+
+/* ══ FULL renderLeaders — person view + heading view + function filter ══ */
+function renderLeaders(c){
+  if(ldrView==='activity'){renderActivityLeaderView(c);return;}
+  if(ldrSubView==='heading'){renderHeadingLeaderView(c);return;}
+
+  // ── PERSON VIEW ──
+  // Build members from real DB + real S logs (not just TEAM fixture)
+  const today = typeof dk==='function'?dk():new Date().toISOString().slice(0,10);
+  const lvMap={'CEO / Board':['ceo'],'Senior Managers':['senior'],'Team Leads':['lead'],'Individual Contributors':['individual']};
+
+  // Merge TEAM fixture with any real logged-in users
+  let members = [...TEAM];
+  // Add any real users from S logs not already in TEAM
+  Object.entries(S).forEach(([date,depts])=>{
+    Object.entries(depts).forEach(([dept,roles])=>{
+      Object.entries(roles).forEach(([role,lg])=>{
+        if(lg._person && !members.find(m=>m.name===lg._person&&m.dept===dept&&m.role===role)){
+          members.push({name:lg._person,dept,role,lvl:'individual',streak:0,d:[0,0,0,0,0,0,0]});
+        }
+      });
+    });
+  });
+
+  // Filter by level and function
+  const filt = members.filter(m=>{
+    const lvOk = lvMap[cLayer]?.includes(m.lvl);
+    const fnOk = ldrFunc==='All' || m.dept===ldrFunc;
+    return lvOk && fnOk;
+  });
+
+  const todayKey = today;
+  let h = '<div class="pg-hd">'
+    +'<div><div class="pg-title">Leader view — '+cLayer+'</div>'
+    +'<div class="pg-sub">'+(ldrFunc==='All'?'All functions':ldrFunc)+' · '+filt.length+' members</div></div>'
+    +'<div style="display:flex;gap:7px">'
+    +'<button class="btn btn-g btn-sm'+(ldrSubView==='person'?' btn-p':'')+'" onclick="ldrSubView=\'person\';buildSB();renderMain()">👤 Person</button>'
+    +'<button class="btn btn-g btn-sm'+(ldrSubView==='heading'?' btn-p':'')+'" onclick="ldrSubView=\'heading\';buildSB();renderMain()">📋 Heading</button>'
+    +'<button class="btn btn-g btn-sm" onclick="ldrView=\'activity\';buildSB();renderMain()">🔢 Numbers</button>'
+    +'</div></div>';
+
+  // Function filter pills
+  h += '<div class="ldr-fn-bar">';
+  ['All',...Object.keys(DB)].forEach(fn=>{
+    const icon = fn==='All'?'🌐':(DB[fn]?.icon||'📋');
+    h += '<button class="ldr-fn-pill'+(ldrFunc===fn?' on':'')+'" onclick="ldrFunc=\''+fn+'\';cLDept=\''+fn+'\';buildSB();renderMain()">'+icon+' '+fn+'</button>';
+  });
+  h += '</div>';
+
+  // Summary bar
+  const avgS = filt.length?Math.round(filt.reduce((a,m)=>a+m.streak,0)/filt.length):0;
+  h += '<div class="mg">'
+    +'<div class="mc hi"><div class="mv">'+filt.length+'</div><div class="ml">Members</div></div>'
+    +'<div class="mc"><div class="mv">'+avgS+'</div><div class="ml">Avg streak</div></div>'
+    +'<div class="mc"><div class="mv">'+filt.filter(m=>{ const lg=S[todayKey]?.[m.dept]?.[m.role]; return lg&&lg.daily.some(Boolean); }).length+'</div><div class="ml">Active today</div></div>'
+    +'<div class="mc"><div class="mv">'+filt.filter(m=>m.streak>=7).length+'</div><div class="ml">7d+ streaks</div></div>'
+    +'</div>';
+
+  // Group by function for person view
+  const byFunc = {};
+  filt.forEach(m=>{
+    const fn = m.dept||'Other';
+    if(!byFunc[fn]) byFunc[fn]={icon:DB[fn]?.icon||'📋',members:[]};
+    byFunc[fn].members.push(m);
+  });
+
+  // Person cards grouped by function
+  for(const [fn, group] of Object.entries(byFunc)){
+    h += '<div style="margin-bottom:18px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:7px;border-bottom:1.5px solid var(--t4)">'
+      +'<span style="font-size:16px">'+group.icon+'</span>'
+      +'<span style="font-size:13px;font-weight:700;color:var(--t)">'+fn+'</span>'
+      +'<span style="font-size:11px;color:var(--t3);font-family:var(--mono)">'+group.members.length+' members</span>'
+      +'</div>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px">';
+    group.members.forEach(m=>{
+      const init = m.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      const lg = S[todayKey]?.[m.dept]?.[m.role];
+      const rd = DB[m.dept]?.roles?.[m.role];
+      const doneToday = lg?lg.daily.filter(Boolean).length:0;
+      const totalToday = rd?rd.daily.length:5;
+      const pctToday = totalToday?Math.round(doneToday/totalToday*100):0;
+      const scoreColor = pctToday>=80?'var(--G)':pctToday>=50?'var(--Am)':'var(--R)';
+      // Collect today's numbers
+      const nums = [];
+      if(lg&&rd){ rd.daily.forEach((item,i)=>{ const v=lg.vals?.['daily_'+i]; if(v&&parseFloat(v)>0) nums.push({n:item.n,v:parseFloat(v),u:item.u||''}); }); }
+      h += '<div style="background:var(--s0);border:1px solid var(--t4);border-radius:var(--r12);padding:14px 15px;box-shadow:var(--sh1);transition:all .18s" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'var(--sh2)\'" onmouseout="this.style.transform=\'\';this.style.boxShadow=\'var(--sh1)\'">'
+        // Header
+        +'<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">'
+        +'<div class="av" style="width:34px;height:34px;font-size:12px;flex-shrink:0">'+init+'</div>'
+        +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:var(--t);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+m.name+'</div>'
+        +'<div style="font-size:11px;color:var(--t2);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+m.role+'</div></div>'
+        +'<div style="text-align:right;flex-shrink:0"><div style="font-size:16px;font-weight:700;color:'+scoreColor+';font-family:var(--mono)">'+pctToday+'%</div><div style="font-size:9px;color:var(--t3)">today</div></div>'
+        +'</div>'
+        // Progress bar
+        +'<div style="height:5px;background:var(--s2);border-radius:3px;overflow:hidden;margin-bottom:8px">'
+        +'<div style="width:'+pctToday+'%;height:100%;background:'+(pctToday>=80?'var(--G)':pctToday>=50?'var(--Am)':'var(--a)')+';border-radius:3px;transition:width .4s"></div></div>'
+        // Stats row
+        +'<div style="display:flex;gap:8px;font-size:10px;color:var(--t3);margin-bottom:'+(nums.length?'9px':'0px')+'">'
+        +'<span>🔥 <b style="color:var(--t)">'+m.streak+'d</b></span>'
+        +'<span>Done: <b style="color:var(--t)">'+doneToday+'/'+totalToday+'</b></span>'
+        +'</span></div>';
+      // Numbers logged today
+      if(nums.length){
+        h += '<div style="display:flex;gap:5px;flex-wrap:wrap">';
+        nums.forEach(n=>{ h+='<span style="font-size:10px;padding:2px 7px;border-radius:999px;background:var(--a3);border:1px solid var(--a4);color:var(--a);font-family:var(--mono);font-weight:600">'+n.v+(n.u?' '+n.u:'')+'</span>'; });
+        h += '</div>';
+      }
+      h += '</div>';
+    });
+    h += '</div></div>';
+  }
+  if(!filt.length) h+='<div style="padding:48px;text-align:center;color:var(--t3);font-size:13px">No members in this filter. Try a different level or function.</div>';
+  c.innerHTML = h;
+}
+
+/* ══ HEADING / ACTIVITY VIEW — activity-first grouping ══ */
+function renderHeadingLeaderView(c){
+  const today = typeof dk==='function'?dk():new Date().toISOString().slice(0,10);
+  const lvMap={'CEO / Board':['ceo'],'Senior Managers':['senior'],'Team Leads':['lead'],'Individual Contributors':['individual']};
+  const members = TEAM.filter(m=>{
+    return (lvMap[cLayer]?.includes(m.lvl)) && (ldrFunc==='All'||m.dept===ldrFunc);
+  });
+
+  let h = '<div class="pg-hd">'
+    +'<div><div class="pg-title">Leader view — by activity heading</div>'
+    +'<div class="pg-sub">'+(ldrFunc==='All'?'All functions':ldrFunc)+' · Who did what · '+members.length+' members</div></div>'
+    +'<div style="display:flex;gap:7px">'
+    +'<button class="btn btn-g btn-sm" onclick="ldrSubView=\'person\';buildSB();renderMain()">👤 Person view</button>'
+    +'<button class="btn btn-g btn-sm" onclick="ldrView=\'activity\';buildSB();renderMain()">🔢 Numbers view</button>'
+    +'</div></div>';
+
+  // Function filter pills
+  h += '<div class="ldr-fn-bar">';
+  ['All',...Object.keys(DB)].forEach(fn=>{
+    const icon = fn==='All'?'🌐':(DB[fn]?.icon||'📋');
+    h += '<button class="ldr-fn-pill'+(ldrFunc===fn?' on':'')+'" onclick="ldrFunc=\''+fn+'\';cLDept=\''+fn+'\';buildSB();renderMain()">'+icon+' '+fn+'</button>';
+  });
+  h += '</div>';
+
+  // For each dept+role combo that has members, show activities as headings
+  const processed = new Set();
+  const depts = ldrFunc==='All'?Object.keys(DB):[ldrFunc];
+
+  depts.forEach(dept=>{
+    const dd = DB[dept];if(!dd)return;
+    Object.entries(dd.roles).forEach(([role,rd])=>{
+      // Find members in this role
+      const roleMembers = members.filter(m=>m.dept===dept&&m.role===role);
+      if(!roleMembers.length)return;
+      const key = dept+'__'+role;
+      if(processed.has(key))return;
+      processed.add(key);
+
+      h += '<div style="background:var(--s0);border:1px solid var(--t4);border-radius:var(--r12);overflow:hidden;margin-bottom:14px;box-shadow:var(--sh1)">';
+      // Role header
+      h += '<div style="padding:10px 14px;background:var(--s1);border-bottom:1px solid var(--t4);display:flex;align-items:center;gap:10px">'
+        +'<span style="font-size:16px">'+dd.icon+'</span>'
+        +'<div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--t)">'+role+'</div><div style="font-size:10px;color:var(--t2)">'+dept+' · '+roleMembers.length+' member'+(roleMembers.length>1?'s':'')+'</div></div>'
+        +'<div style="display:flex;gap:5px">';
+      roleMembers.forEach(m=>{ const init=m.name.split(' ').map(w=>w[0]).join('').slice(0,2); h+='<div class="av" style="width:24px;height:24px;font-size:9px;flex-shrink:0" title="'+m.name+'">'+init+'</div>'; });
+      h += '</div></div>';
+
+      // Activities as rows
+      ['daily','weekly','monthly'].forEach(freq=>{
+        if(!rd[freq]?.length)return;
+        h += '<div class="hdg-section-hd">'+freq+'</div>';
+        rd[freq].forEach((item,i)=>{
+          h += '<div class="hdg-row">'
+            +'<div class="hdg-act-nm">'+item.n+(item.u?'<span style="font-size:10px;color:var(--t3);margin-left:4px">· '+item.u+'</span>':'')+'</div>'
+            +'<div class="hdg-person-vals">';
+          roleMembers.forEach(m=>{
+            const lg = S[today]?.[dept]?.[role];
+            const isDone = lg?.[freq]?.[i]||false;
+            const val = lg?.vals?.[freq+'_'+i]||'';
+            const init = m.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+            const showVal = val&&parseFloat(val)>0;
+            h += '<span class="hdg-val-chip'+(isDone?' done':'')+'" title="'+m.name+'">'
+              +'<span class="hvc-name">'+init+'</span>'
+              +'<span class="hvc-val">'+(showVal?parseFloat(val).toLocaleString():(isDone?'✓':'—'))+'</span>'
+              +(showVal&&item.u?'<span style="font-size:9px;color:var(--t3)">'+item.u+'</span>':'')
+              +'</span>';
+          });
+          h += '</div></div>';
+        });
+      });
+      h += '</div>';
+    });
+  });
+
+  if(!processed.size) h+='<div style="padding:48px;text-align:center;color:var(--t3);font-size:13px">No activities found for this filter.</div>';
+  c.innerHTML = h;
+}
+
+
+function _buildSBOther() {
+  const sb = document.getElementById('sidebar');
+  if(!sb) return;
+  if(cTab==='inputs'){
+    if(CU?.type==='member'){
+      const rd=DB[cDept]?.roles?.[cRole];const lg=S[dk()]?.[cDept]?.[cRole];
+      const done=lg?.daily?.filter(Boolean).length||0;const tot=rd?.daily?.length||0;
+      const pct=tot?Math.round(done/tot*100):0;
+      sb.innerHTML='<div class="sb-lbl">My role</div>';
+      const d=document.createElement('div');d.style.cssText='margin:6px 10px;padding:12px;background:var(--a3);border:1px solid var(--a4);border-radius:10px;';
+      d.innerHTML='<div style="font-size:13px;font-weight:600;color:var(--a)">'+cRole+'</div><div style="font-size:11px;color:var(--t2);margin-top:2px">'+cDept+'</div><div style="font-size:10px;color:var(--t3);margin-top:8px;font-family:var(--mono)">'+done+'/'+tot+' daily done</div><div style="height:4px;background:var(--s2);border-radius:2px;margin-top:6px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:var(--a);border-radius:2px;transition:width .4s"></div></div>';
+      sb.appendChild(d);
+    } else {
+      sb.innerHTML='<div class="sb-lbl">Departments</div>';
+      for(const[dn,dd] of Object.entries(DB)){
+        const isO=!!oD[dn];const roles=Object.keys(dd.roles);
+        const btn=document.createElement('div');btn.className='sb-btn';
+        btn.innerHTML='<span class="sb-ico">'+dd.icon+'</span><span class="sb-nm">'+dn+'</span><span class="sb-tag">'+roles.length+'</span><span style="font-size:9px;color:var(--t3);margin-left:2px">'+(isO?'▾':'▸')+'</span>';
+        btn.onclick=()=>{oD[dn]=!oD[dn];buildSB();};sb.appendChild(btn);
+        if(isO)roles.forEach(rn=>{
+          const active=dn===cDept&&rn===cRole;
+          sb.appendChild(buildEnhancedRoleBtn(dn,rn,active));
+        });
+      }
+    }
+  
+  } else if(cTab==='projects'){
+    sb.innerHTML='<div class="sb-lbl">Projects</div>';
+    PROJS.forEach(p=>{const c=p.status==='in-progress'?'var(--a)':p.status==='planning'?'var(--Bl)':'var(--G)';const b=document.createElement('div');b.className='sb-btn'+(selProj?.id===p.id?' on':'');b.innerHTML='<span class="sb-nm">'+p.name+'</span><span style="width:7px;height:7px;border-radius:50%;background:'+c+';flex-shrink:0"></span>';b.onclick=()=>{selProj=p;buildSB();renderMain();};sb.appendChild(b);});
+    const ab=document.createElement('div');ab.className='sb-btn';ab.innerHTML='<span class="sb-nm" style="color:var(--a)">+ New project</span>';ab.onclick=showAddProj;sb.appendChild(ab);
+  } else if(cTab==='goals'){
+    sb.innerHTML='<div class="sb-lbl">Filter by dept</div>';
+    ['All','Finance','Sales','Engineering','Marketing','HR'].forEach(d=>{const b=document.createElement('div');b.className='sb-btn';b.innerHTML='<span class="sb-nm">'+d+'</span>';b.onclick=()=>renderMain();sb.appendChild(b);});
+  } else if(cTab==='integrations'){
+    sb.innerHTML='<div class="sb-lbl">Category</div>';
+    ['All','Analytics','Notifications'].forEach(c=>{const b=document.createElement('div');b.className='sb-btn';b.innerHTML='<span class="sb-nm">'+c+'</span>';b.onclick=()=>renderMain();sb.appendChild(b);});
+    sb.innerHTML+='<div class="sb-sep"></div><div class="sb-lbl">Connected dashboards</div>';
+    INTEGRATIONS.filter(i=>i.connected&&i.category==='Analytics').forEach(i=>{const b=document.createElement('div');b.className='sb-btn'+(selIntegration?.id===i.id?' on':'');b.innerHTML='<span class="sb-ico">'+i.logo+'</span><span class="sb-nm">'+i.name+'</span>';b.onclick=()=>{selIntegration=i;buildSB();renderMain();};sb.appendChild(b);});
+  } else if(cTab==='hrms'){
+    sb.innerHTML='<div class="sb-lbl">HR modules</div>';
+    ['All employees','Active','On leave','Onboarding','Payroll','Performance','Exit'].forEach(m=>{const b=document.createElement('div');b.className='sb-btn';b.innerHTML='<span class="sb-nm">'+m+'</span>';b.onclick=()=>renderMain();sb.appendChild(b);});
+  }
+}
 </script>
 </body>
 </html>
