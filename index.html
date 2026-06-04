@@ -45,8 +45,16 @@ body.slate{--a:#4C6280;--a2:#384B62;--a3:rgba(76,98,128,.09);--a4:rgba(76,98,128
 /* ════════ RESET ════════ */
 *{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:13.5px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-body{font-family:var(--sans);background:var(--bg);color:var(--t);overflow:hidden;height:100vh;letter-spacing:-.005em;}
+body{font-family:var(--sans);background:var(--bg);color:var(--t);overflow:hidden;height:100vh;height:100dvh;letter-spacing:-.005em;}
 input,select,textarea,button{font-family:var(--sans);}
+input,select,textarea{
+  user-select:text !important;
+  -webkit-user-select:text !important;
+  pointer-events:auto !important;
+  touch-action:auto !important;
+  position:relative;
+  z-index:1;
+}
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -81,8 +89,8 @@ input,select,textarea,button{font-family:var(--sans);}
 .body{display:flex;flex:1;overflow:hidden;}
 .sb{width:210px;flex-shrink:0;border-right:1px solid var(--t4);background:var(--s0);display:flex;flex-direction:column;overflow:hidden;}
 .sb-scroll{flex:1;overflow-y:auto;padding:6px 0;}
-.main{flex:1;overflow-y:auto;background:var(--bg);}
-.pad{padding:22px 24px;max-width:1320px;}
+.main{flex:1;overflow-y:auto;background:var(--bg);min-width:0;width:0;}
+.pad{padding:20px 24px;width:100%;}
 
 /* ════════ SIDEBAR ════════ */
 .sb-lbl{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:10px 14px 3px;}
@@ -157,17 +165,18 @@ input,select,textarea,button{font-family:var(--sans);}
 .fp-m{background:var(--Pub);color:var(--Pu);border:1px solid var(--Pud);}
 .freq-lbl{font-size:12px;font-weight:600;color:var(--t);}
 .freq-cnt{margin-left:auto;font-size:10px;color:var(--t3);font-family:var(--mono);}
-.act{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1.5px solid var(--t4);border-radius:var(--r8);margin-bottom:5px;cursor:pointer;transition:all .2s;user-select:none;background:var(--s0);max-width:680px;}
+.act{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1.5px solid var(--t4);border-radius:var(--r8);margin-bottom:5px;cursor:pointer;transition:all .2s;user-select:none;background:var(--s0);width:100%;}
+.act input,.act select,.act textarea{user-select:text !important;-webkit-user-select:text !important;cursor:text;}
 .act:hover:not(.done){background:var(--s1);border-color:var(--t3);transform:translateX(2px);}
 .act.done{border-color:var(--a);background:linear-gradient(135deg,rgba(255,250,245,.8),rgba(255,242,228,.8));}
 .act-cb{width:21px;height:21px;border-radius:5px;border:1.5px solid var(--t3);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--s0);transition:all .22s;}
 .act.done .act-cb{background:var(--a);border-color:var(--a);box-shadow:0 2px 8px var(--a3);}
 .chk{display:none;width:11px;height:11px;}
 .act.done .chk{display:block;}
-.act-nm{font-size:12.5px;font-weight:500;color:var(--t);flex:1;letter-spacing:-.005em;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px;}
+.act-nm{font-size:12.5px;font-weight:500;color:var(--t);flex:1;letter-spacing:-.005em;min-width:0;line-height:1.4;}
 .act.done .act-nm{color:var(--t2);text-decoration:line-through;text-decoration-color:var(--a4);}
 .act-hint{font-size:10px;color:var(--t3);margin-top:1px;}
-.nin{width:88px;padding:5px 9px;border-radius:var(--r8);border:1.5px solid var(--t4);background:var(--s0);color:var(--t);font-size:13px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;font-weight:600;}
+.nin{width:88px;padding:5px 9px;border-radius:var(--r8);border:1.5px solid var(--t4);background:var(--s0);color:var(--t);font-size:13px;font-family:var(--mono);text-align:right;outline:none;transition:border-color .15s;font-weight:600;pointer-events:auto !important;user-select:text !important;-webkit-user-select:text !important;touch-action:auto !important;}
 .nin:focus{border-color:var(--a);background:var(--s0);}
 .nin:focus{border-color:var(--a);background:var(--s0);}
 .nunit{font-size:10px;color:var(--t3);white-space:nowrap;font-weight:500;}
@@ -288,7 +297,7 @@ input,select,textarea,button{font-family:var(--sans);}
 .m-ttl{font-size:16px;font-weight:600;color:var(--t);margin-bottom:4px;letter-spacing:-.01em;}
 .m-sub{font-size:12px;color:var(--t2);margin-bottom:18px;line-height:1.6;}
 .flbl{display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
-.finput{width:100%;padding:9px 11px;border:1.5px solid var(--t4);border-radius:var(--r8);background:var(--s0);color:var(--t);font-size:13px;outline:none;transition:border-color .15s;margin-bottom:11px;}
+.finput{width:100%;padding:9px 11px;border:1.5px solid var(--t4);border-radius:var(--r8);background:var(--s0);color:var(--t);font-size:13px;outline:none;transition:border-color .15s;margin-bottom:11px;pointer-events:auto !important;user-select:text !important;-webkit-user-select:text !important;}
 .finput:focus{border-color:var(--a);}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
 .m-foot{display:flex;gap:7px;justify-content:flex-end;margin-top:6px;}
@@ -452,7 +461,123 @@ table.sc tr:hover td{background:var(--a3);}
 
 /* Two-col helper */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
-@media(max-width:900px){.two-col,.kanban{grid-template-columns:1fr;}}.
+
+/* ══ FULL RESPONSIVE SYSTEM ══ */
+
+/* Laptop narrow */
+@media(max-width:1280px){
+  .sb{width:186px;}
+  .pad{padding:18px 20px;}
+  .ntab{padding:0 10px;font-size:11.5px;}
+  .mv{font-size:20px;}
+}
+
+/* Tablet landscape */
+@media(max-width:1024px){
+  .sb{width:172px;}
+  .pad{padding:16px 18px;}
+  .mg{grid-template-columns:repeat(2,1fr);}
+  .two-col{grid-template-columns:1fr;}
+  .kanban{grid-template-columns:repeat(2,1fr);}
+  .ntab{padding:0 9px;font-size:11px;}
+  .emp-grid{grid-template-columns:repeat(2,1fr);}
+  .int-grid{grid-template-columns:repeat(2,1fr);}
+}
+
+/* Tablet portrait — sidebar becomes slide-over */
+@media(max-width:768px){
+  html,body{height:100%;overflow:hidden;}
+  #app{height:100dvh;height:100vh;}
+  /* Sidebar slides in from left */
+  .sb{
+    position:fixed;left:0;top:0;bottom:0;z-index:150;
+    width:260px;transform:translateX(-100%);
+    box-shadow:4px 0 32px rgba(0,0,0,.18);
+    transition:transform .28s cubic-bezier(.4,0,.2,1);
+  }
+  .sb.open{transform:translateX(0);}
+  /* Sidebar overlay */
+  #sb-overlay{display:block !important;opacity:0;transition:opacity .28s;pointer-events:none;}
+  #sb-overlay.open{opacity:1;pointer-events:auto;}
+  .body{flex-direction:row;}
+  .main{width:100%;}
+  /* Nav */
+  .nav{padding:0 12px;height:52px;}
+  .nav-tabs{display:none;}
+  .brand-name{font-size:14px;}
+  .org-pill{display:none;}
+  .nav-streak-badge span:last-child{display:none;}
+  /* Show hamburger */
+  #mobile-menu-btn{display:flex !important;}
+  /* Bottom nav */
+  #mobile-nav{display:flex !important;}
+  /* Pad content above bottom nav */
+  .main{padding-bottom:56px;}
+  /* Content */
+  .pad{padding:14px 15px;}
+  /* Streak bar wraps */
+  .streak-score-bar{flex-wrap:wrap;gap:8px;}
+  .streak-score-bar > div:first-child{width:100%;}
+  /* Cards 2col */
+  .mg{grid-template-columns:repeat(2,1fr);}
+  .emp-grid{grid-template-columns:repeat(2,1fr);}
+  .int-grid{grid-template-columns:repeat(2,1fr);}
+  .kanban{grid-template-columns:1fr 1fr;}
+  .two-col{grid-template-columns:1fr;}
+  /* Modal */
+  .modal-over{padding:8px;}
+  .modal-box{max-width:100% !important;border-radius:14px;}
+  /* Role hero compact */
+  .role-hero{padding:12px 14px;gap:10px;}
+  .hero-desc{display:none;}
+}
+
+/* Phone */
+@media(max-width:480px){
+  .nav{height:50px;padding:0 10px;}
+  .brand-name{font-size:13.5px;}
+  .nav-streak-badge{padding:3px 8px;font-size:10px;}
+  .user-chip{padding:3px 8px 3px 3px;}
+  .pad{padding:11px 13px;}
+  .pad{padding-bottom:64px;}
+  /* Activity items */
+  .act{padding:9px 11px;gap:7px;}
+  .act-nm{font-size:12px;}
+  .nin{width:70px;font-size:12px;padding:4px 7px;}
+  /* Cards */
+  .mg{grid-template-columns:1fr 1fr;gap:8px;}
+  .mv{font-size:18px;}
+  .ml{font-size:10px;}
+  .mc{padding:10px 12px;}
+  /* Grids */
+  .emp-grid{grid-template-columns:1fr;}
+  .int-grid{grid-template-columns:1fr;}
+  .kanban{grid-template-columns:1fr;}
+  /* Streak bar */
+  .streak-score-bar{padding:8px 11px;}
+  .streak-period-btn{padding:3px 7px;font-size:10px;}
+  .date-badge{display:none;}
+  /* Heatmap scrolls */
+  .hmap{overflow-x:auto;}
+  /* Login */
+  .lc{padding:20px 15px 18px;border-radius:12px;}
+  .l-type-btn{padding:11px 12px;}
+  /* Hero */
+  .role-hero{flex-wrap:wrap;}
+  .hero-chips{gap:4px;}
+  .hchip{font-size:10px;padding:2px 6px;}
+  /* Freq pills */
+  .fpill{font-size:9.5px;padding:1px 7px;}
+  /* Table horizontal scroll */
+  .tt{font-size:11px;}
+}
+
+/* Very small phones */
+@media(max-width:360px){
+  .nav-streak-badge{display:none;}
+  .mg{grid-template-columns:1fr;}
+}
+
 
 /* Streak score pill */
 .streak-score-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--s0);border:1px solid var(--t4);border-radius:var(--r12);margin-bottom:14px;flex-wrap:wrap;}
@@ -513,7 +638,7 @@ table.sc tr:hover td{background:var(--a3);}
     <div class="l-form" id="lf-member">
       <button class="l-back" onclick="showLF(null)">← Back</button>
       <label class="flbl">Your name</label>
-      <input class="finput" id="m-name" type="text" placeholder="Enter your name...">
+      <input class="finput" id="m-name" type="text" placeholder="Enter your name..." autocomplete="name" style="pointer-events:auto;user-select:text;-webkit-user-select:text">
       <label class="flbl">Department</label>
       <select class="finput" id="m-dept" onchange="fillRoles()"><option value="">— Select department —</option></select>
       <label class="flbl">Your role</label>
@@ -523,12 +648,9 @@ table.sc tr:hover td{background:var(--a3);}
     <div class="l-form" id="lf-admin">
       <button class="l-back" onclick="showLF(null)">← Back</button>
       <label class="flbl">Your name</label>
-      <input class="finput" id="a-name" type="text" placeholder="Admin name...">
-      <label class="flbl">Passcode</label>
-      <input class="finput" id="a-pass" type="password" placeholder="Enter passcode..." onkeydown="if(event.key==='Enter')doLogin('admin')">
-      <div class="l-hint">Demo passcode: <strong>admin123</strong></div>
-      <button class="btn btn-p" style="width:100%;justify-content:center" onclick="doLogin('admin')">Access admin →</button>
-      <div class="l-err" id="a-err">Incorrect passcode. Please try again.</div>
+      <input class="finput" id="a-name" type="text" placeholder="Your name..." onkeydown="if(event.key==='Enter')doLogin('admin')" autocomplete="off">
+      <button class="btn btn-p" style="width:100%;justify-content:center;margin-top:4px" onclick="doLogin('admin')">Enter as Admin →</button>
+      <div class="l-err" id="a-err" style="display:none"></div>
     </div>
   </div>
 </div>
@@ -536,6 +658,7 @@ table.sc tr:hover td{background:var(--a3);}
 <!-- APP -->
 <div class="app" id="app" style="visibility:hidden">
   <nav class="nav">
+    <button id="mobile-menu-btn" onclick="openSidebar()" style="display:none;border:none;background:none;cursor:pointer;padding:5px 9px;font-size:21px;color:var(--t);line-height:1;margin-right:2px">☰</button>
     <div class="brand">
       <div class="brand-mark"><svg viewBox="0 0 14 14" fill="none"><path d="M4 11.5L7 2L10 11.5" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.3 8.5H8.7" stroke="white" stroke-width="1.9" stroke-linecap="round"/></svg></div>
       <span class="brand-name"><span class="op">Op</span>Streak</span>
@@ -583,7 +706,30 @@ table.sc tr:hover td{background:var(--a3);}
   </div>
 </div>
 
+<!-- SIDEBAR OVERLAY -->
+<div id="sb-overlay" style="display:none;position:fixed;inset:0;background:rgba(26,22,18,.52);z-index:140;backdrop-filter:blur(3px)" onclick="closeSidebar()"></div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div id="mobile-nav" style="display:none;position:fixed;bottom:0;left:0;right:0;height:56px;background:var(--s0);border-top:1px solid var(--t4);z-index:130;align-items:stretch;box-shadow:0 -2px 16px rgba(0,0,0,.08)">
+  <button onclick="openSidebar()" style="flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;color:var(--t2);cursor:pointer">
+    <span style="font-size:19px">☰</span>Menu
+  </button>
+  <button onclick="mTab('inputs')" id="mbn-inputs" style="flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;color:var(--a);font-weight:600;cursor:pointer;border-top:2px solid var(--a)">
+    <span style="font-size:19px">📋</span>Inputs
+  </button>
+  <button onclick="mTab('leaders')" id="mbn-leaders" style="flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;color:var(--t2);cursor:pointer">
+    <span style="font-size:19px">👥</span>Leaders
+  </button>
+  <button onclick="mTab('dashboard')" id="mbn-dash" style="flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;color:var(--t2);cursor:pointer">
+    <span style="font-size:19px">📊</span>Dashboard
+  </button>
+  <button onclick="mTab('certs')" id="mbn-certs" style="flex:1;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:9.5px;color:var(--t2);cursor:pointer">
+    <span style="font-size:19px">🏆</span>Certs
+  </button>
+</div>
+
 <!-- CELEBRATION -->
+
 <div id="celeb">
   <div class="cb-box">
     <span class="cb-emoji" id="c-em">🎉</span>
@@ -872,9 +1018,8 @@ function doLogin(type){
     if(!n)return toast('Enter your name');if(!d)return toast('Select department');if(!r)return toast('Select role');
     CU={name:n,type:'member',dept:d,role:r};
   } else {
-    const n=document.getElementById('a-name').value.trim();const p=document.getElementById('a-pass').value;
+    const n=document.getElementById('a-name').value.trim();
     if(!n)return toast('Enter your name');
-    if(p!=='admin123'){document.getElementById('a-err').style.display='block';return;}
     CU={name:n,type:'admin',dept:null,role:null};
   }
   document.getElementById('login').style.display='none';
@@ -998,7 +1143,7 @@ function renderInputs(c){
     });
     h+='</div>';
   });
-  h+='<div class="add-row"><input type="text" id="an" placeholder="Add activity..." style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
+  h+='<div class="add-row"><input type="text" id="an" placeholder="Add activity..." onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
   h+='<div style="margin-top:18px"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">🔥 30-day streak</div><div style="display:flex;gap:3px;flex-wrap:wrap" id="streak-grid"></div></div>';
   c.innerHTML=h;
   buildStreakGrid();
@@ -1712,7 +1857,8 @@ const INDUSTRY_TEMPLATES = {
       }}
     }
   }
-
+,
+  'ekincare': {"name":"ekincare Operations","icon":"🏥","desc":"R1 · R2 · Ria · CD · Non-Diagnostics · OHC · Onsite · Digitalization","departments":{"R2":{"icon":"🟠","roles":{"Confirmations- Inclinic":{"lvl":"individual","desc":"Diagnostics — Confirmations- Inclinic","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download & sanitize email data","u":"cases","h":""},{"n":"Sort data by partner","u":"cases","h":""},{"n":"Share confirmations via email","u":"cases","h":""},{"n":"Manually  Sharing Confirmation data (Non Mail Confirming Whatsapp) Approx ( 1...","u":"cases","h":""},{"n":"Manually  Sharing Confirmation data (Over Calls only if no revert on Mail/ wh...","u":"cases","h":""},{"n":"Once vendor reverts over a mail, the tickets are generated.","u":"cases","h":""},{"n":"Checklist (Date and time of appointment, Doctor availabilty, Slot availabilit...","u":"cases","h":""},{"n":"Manual confirming-Case 1: If no changes, confirm the the appointment from das...","u":"cases","h":""},{"n":"Case 2: If any change, call the customer ( Based on specific notes or conditi...","u":"cases","h":""},{"n":"Case 3: If user agreed for the changed timings and date, reschedule and confirm","u":"cases","h":""},{"n":"Case 4: If user doesn't respond then a mail to be shared stating  the appt is...","u":"cases","h":""},{"n":"Case 5: If there are bulk rejections from any specific partner, bulk email wi...","u":"","h":""},{"n":"Auto confirming (One day prior apppointments will be shared  for some vendors)","u":"cases","h":""},{"n":"Case 1: For vendors who are receiving automated emails, vendors will be shari...","u":"cases","h":""},{"n":"Case 1: 70% of  the appointments getting confirmed-API and PD","u":"cases","h":""},{"n":"Case 2: 30 % of the appointments are not confirmed <> Data will shared by eki...","u":"cases","h":""},{"n":"Share reminder msgs on watsapp to confirm the appointments. 20% of the vendor...","u":"cases","h":""},{"n":"Follow-up with vendors for the confirmation (>1 day)","u":"","h":""},{"n":"Reminders through email and watsapp","u":"cases","h":""},{"n":"Error case handling- Package issues","u":"","h":""},{"n":"Automated emails check","u":"cases","h":""},{"n":"Split packages check","u":"","h":""},{"n":"Facility timings check","u":"","h":""},{"n":"Doctor unavailabilty, Facility issues","u":"","h":""},{"n":"Rejections -Past apts","u":"","h":""},{"n":"API failures cases","u":"","h":""},{"n":"No show cases","u":"","h":""},{"n":"Executions validation","u":"","h":""}],"weekly":[],"monthly":[]},"Reports-Inclinic":{"lvl":"individual","desc":"Diagnostics — Reports-Inclinic","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download data","u":"cases","h":""},{"n":"Clean & sanitize data","u":"cases","h":""},{"n":"Sort data by partner","u":"cases","h":""},{"n":"Sending reminder mails to providers where automated mails have not gone properly","u":"cases","h":""},{"n":"Mail checking whether reports received or not","u":"cases","h":""},{"n":"Self verification after partner says we have already shared the particular re...","u":"cases","h":""},{"n":"PDF Editing for cases where there may be incorrect ages","u":"cases","h":""},{"n":"Comparing the customer name from the reports and the crm data export to deriv...","u":"cases","h":""},{"n":"Uploading the reports that are received on mails using the feature of crm <> ...","u":"cases","h":""},{"n":"Uploading the reports that are received on reports mail and Whatsapp","u":"","h":""},{"n":"Dropping mails to customers regarding pending tests","u":"cases","h":""},{"n":"Searching each appointment name from crm export in the portal","u":"cases","h":""},{"n":"case 1 : if report found then the report is downloaded and then uploaded in o...","u":"cases","h":""},{"n":"case 2: For all non apollo portals, if reports are not found within 48 hours ...","u":"cases","h":""},{"n":"PPMC reports followups and PE follow ups.","u":"cases","h":""},{"n":"Package issues calling done to customer and arranging the pending tests","u":"","h":""}],"weekly":[],"monthly":[]},"Reports-Home collection":{"lvl":"individual","desc":"Diagnostics — Reports-Home collection","daily":[{"n":"Apply queue filters , Download data, Cleaning and sanitiation","u":"","h":""},{"n":"Searching each appointment name from crm export in the portal","u":"","h":""},{"n":"case 2: For all  portals, if reports are not found within 24 hours based on s...","u":"","h":""},{"n":"Case 5: Customer not given sample, Calling customers and cross verifying, If ...","u":"","h":""},{"n":"Sending Mails to the customer if not willing for the pending test","u":"","h":""}],"weekly":[],"monthly":[]},"Confirmations-Home Collections":{"lvl":"individual","desc":"Diagnostics — Confirmations-Home Collections","daily":[{"n":"Pending confirmations- Data","u":"cases","h":""},{"n":"Posting  in whatsapp groups","u":"cases","h":""},{"n":"Slot issues- Calling customers","u":"cases","h":""},{"n":"Whatsapp message on status of confirmation","u":"cases","h":""},{"n":"Validations- QC and reminding vendors to share the data","u":"cases","h":""},{"n":"Tickets","u":"cases","h":""},{"n":"Sharing of data with the partners","u":"cases","h":""},{"n":"Use filters in the live tracker to update the status","u":"cases","h":""}],"weekly":[],"monthly":[]},"Vaccination-Confirmations":{"lvl":"individual","desc":"Vaccinations — Vaccination-Confirmations","daily":[{"n":"Apply queue filters","u":"","h":""},{"n":"Download data","u":"","h":""},{"n":"Download & sanitize email data","u":"","h":""},{"n":"Sort data by partner","u":"","h":""},{"n":"Share confirmations via email","u":"","h":""},{"n":"Manually  Sharing Confirmation data (Non Mail Confirming Whatsapp)","u":"","h":""},{"n":"Once vendor reverts over a mail, confirm the appointment","u":"","h":""},{"n":"If vendor does not respond, follow up","u":"","h":""},{"n":"If vendor revert, confirm the apt based on the Checklist (Date and time of ap...","u":"","h":""},{"n":"Manual confirming: If no changes, confirm the the appointment from dashboard","u":"","h":""},{"n":"If any change, call the customer ( Based on specific notes or conditions like...","u":"","h":""},{"n":"If user agreed for the changed timings and date, reschedule and confirm","u":"","h":""},{"n":"If user doesn't respond then a mail to be shared stating  the appt is cancelled","u":"","h":""},{"n":"If user books for paediatric vaccination-cross check if they booked for paed ...","u":"","h":""},{"n":"User not booked for paed consultation. Call the user and guide them to book f...","u":"","h":""},{"n":"Cross check if the consultation appointment booked.","u":"","h":""},{"n":"If booked confirm the appointment by checking the availabilty of  doctor in t...","u":"","h":""},{"n":"One day prior appointments share whatsapp msg or text SMS on confirmation of ...","u":"","h":""}],"weekly":[],"monthly":[]},"Vaccination-Status updatiom":{"lvl":"individual","desc":"Vaccinations — Vaccination-Status updatiom","daily":[{"n":"Follow up with vendor for status update","u":"","h":""},{"n":"Call user for visit status if vendor unresponsive","u":"","h":""},{"n":"For queries, escalations(Changes in the vaccine after doctor consultation, re...","u":"","h":""}],"weekly":[],"monthly":[]},"Vaccination -QC":{"lvl":"individual","desc":"Vaccinations — Vaccination -QC","daily":[{"n":"Cross checking with the vendors where the stock is available for the confirme...","u":"","h":""}],"weekly":[],"monthly":[]},"Inclinic Consultations- Confirmations":{"lvl":"individual","desc":"Inclinic Consultations — Inclinic Consultations- Confirmations","daily":[{"n":"Apply queue filters","u":"","h":""},{"n":"Download data","u":"","h":""},{"n":"Download & sanitize email data","u":"","h":""},{"n":"Share the emails to the hospitals where we will get confirmation only through...","u":"","h":""},{"n":"When we get the confimation over email. Confirm on the dashboard accordingly ...","u":"","h":""},{"n":"If there are any changes in the date, time, doctor availabilty- Call the user...","u":"","h":""},{"n":"After rescheduling again share the same with vendor and get it confirmed","u":"","h":""},{"n":"For adhoc clinics, call to the customer care. Check for the doctor availabilt...","u":"","h":""},{"n":"If  the doctor is available as per user appointment. Book the slot in the res...","u":"","h":""},{"n":"Introduce ekincare and request  the contact details for the tie-up","u":"","h":""},{"n":"Confirm the appointment in the dashboard if no changes.","u":"","h":""},{"n":"If any changes or if doctor is not available call the user , reschedule the a...","u":"","h":""},{"n":"If user is not responding, Share email concerning the changes","u":"","h":""},{"n":"Once confirmation is received from clinic and user. Confirm on the dashboard","u":"","h":""},{"n":"One day prior appointments- Share the voucher and confirmation message to use...","u":"","h":""}],"weekly":[],"monthly":[]},"Inclinic Consultations- Status updation":{"lvl":"individual","desc":"Inclinic Consultations — Inclinic Consultations- Status updation","daily":[{"n":"Same day  status updation to be done by calling the users or from the vendors.","u":"","h":""},{"n":"If user has visited, update the status to completed and request user to uploa...","u":"","h":""},{"n":"If user has not visited reschedule or cancel the appointment as per customers...","u":"","h":""}],"weekly":[],"monthly":[]},"Existing Network Management":{"lvl":"individual","desc":"Supply lead — Existing Network Management","daily":[{"n":"Task Creation","u":"","h":""},{"n":"Package Mapping","u":"","h":""},{"n":"Margin analysis & Approvals","u":"","h":""},{"n":"Network Analysis","u":"","h":""},{"n":"Payment Sheet and Ledger Closures","u":"","h":""},{"n":"Supply launch Tasks\n1)RFP(300)\n2)Negotiations(1-5times)(500)\n3)Paper work(200...","u":"","h":""},{"n":"Standard Package closures","u":"","h":""}],"weekly":[],"monthly":[]},"New supply -Centres":{"lvl":"individual","desc":"Supply lead — New supply -Centres","daily":[{"n":"Partner Sourcing","u":"","h":""},{"n":"Reminders","u":"","h":""},{"n":"Negotiations","u":"","h":""},{"n":"Paper work","u":"","h":""}],"weekly":[],"monthly":[]},"New supply -Doctors":{"lvl":"individual","desc":"Supply lead — New supply -Doctors","daily":[{"n":"New Doctors On boarding","u":"","h":""},{"n":"Doctors management","u":"","h":""},{"n":"Doctors & Vaccinations Invoices","u":"","h":""},{"n":"Margin Analyisis by RM","u":"","h":""}],"weekly":[],"monthly":[]}}},"Ria":{"icon":"🎫","roles":{"Confirmations- Inclinic":{"lvl":"individual","desc":"Ria — Confirmations- Inclinic","daily":[{"n":"Morning Execution","u":"","h":""},{"n":"Confirmation related tickets closure raised by CD team (>1 day)","u":"cases","h":""},{"n":"Payment related appointment rescheduling from Ekincare's side","u":"","h":""}],"weekly":[],"monthly":[]},"Reports-Inclinic":{"lvl":"individual","desc":"Ria — Reports-Inclinic","daily":[{"n":"Calling the providers if the reports are not received after TAT breach","u":"cases","h":""},{"n":"Reports related tickets closure raised by CD team","u":"cases","h":""},{"n":"Checking Package issues for pending components and adding them in the package...","u":"","h":""}],"weekly":[],"monthly":[]},"Reports-Home collection":{"lvl":"individual","desc":"Ria — Reports-Home collection","daily":[{"n":"case 1 : if report found then the report is downloaded and then uploaded in o...","u":"","h":""},{"n":"Checking missing components in portal","u":"","h":""},{"n":"case 1 : if  pending report found then the report is downloaded and then uplo...","u":"","h":""},{"n":"Case 2: Checking whether the pending tests reports update is already shared i...","u":"","h":""},{"n":"Case 3: Sharing the pending reports data in the whatsapp group and asking for...","u":"","h":""},{"n":"Calling the providers if the updates are not received","u":"","h":""},{"n":"Checking the updates received from partner","u":"","h":""},{"n":"Case 1: Sample got hemolysed- Calling customer for resample","u":"","h":""},{"n":"Case 2: Missing component is not  there in the package-Checking LOI, Sharing ...","u":"","h":""},{"n":"Case 3: Sample is insufficient- Calling customers for resample","u":"","h":""},{"n":"Case 4: Partner took wrong package, asking partner to correct the package and...","u":"","h":""},{"n":"Arranging Resample","u":"","h":""}],"weekly":[],"monthly":[]},"Confirmations-Home Collections":{"lvl":"individual","desc":"Ria — Confirmations-Home Collections","daily":[{"n":"Working on rejected cases","u":"cases","h":""},{"n":"Executions- sugar fit","u":"cases","h":""},{"n":"Executions- other than sugar fit + Tickets","u":"cases","h":""},{"n":"No show Validation","u":"cases","h":""},{"n":"Daily execution reconciliation","u":"cases","h":""}],"weekly":[],"monthly":[]},"Channel Partners":{"lvl":"individual","desc":"Ria — Channel Partners","daily":[{"n":"Care bookings","u":"","h":""},{"n":"Care reports to be uploaded within 24 hours","u":"cases","h":""},{"n":"Addressing all the channel partners queries","u":"","h":""},{"n":"Booking requests","u":"cases","h":""},{"n":"Channel partners reports follow-up","u":"cases","h":""},{"n":"Follow-up with confirmation team to share confirmation and rejection data to ...","u":"cases","h":""}],"weekly":[],"monthly":[]},"VIP-Tickets":{"lvl":"individual","desc":"Ria — VIP-Tickets","daily":[{"n":"Escalations tickets- Need to deep dive and close","u":"","h":""},{"n":"Adhoc Requests","u":"","h":""},{"n":"Booking request","u":"","h":""}],"weekly":[],"monthly":[]},"VIP-Nura bookings":{"lvl":"individual","desc":"Ria — VIP-Nura bookings","daily":[{"n":"Apply queue filters","u":"","h":""},{"n":"Download & sanitize email data","u":"","h":""},{"n":"Log in to Nura portal","u":"","h":""},{"n":"Check booking status (new/existing)","u":"","h":""},{"n":"If the user is new, select new, then package, date, time","u":"","h":""},{"n":"Fill all the user details","u":"","h":""},{"n":"If the slots are not available, call the user and book as per users","u":"","h":""}],"weekly":[],"monthly":[]},"VIP-Nura Reports":{"lvl":"individual","desc":"Ria — VIP-Nura Reports","daily":[{"n":"Apply queue filters","u":"","h":""},{"n":"Download & sanitize email data","u":"","h":""},{"n":"Share email to Nura for the reports","u":"","h":""},{"n":"Call branch-wise managers and get the reports","u":"","h":""}],"weekly":[],"monthly":[]},"VIP-Rejected Cases":{"lvl":"individual","desc":"Ria — VIP-Rejected Cases","daily":[{"n":"Calling VIP rejected cases and getting it scheduled","u":"","h":""}],"weekly":[],"monthly":[]},"VIP-Confirmations":{"lvl":"individual","desc":"Ria — VIP-Confirmations","daily":[{"n":"Get confirmations for all the VIP apts","u":"","h":""},{"n":"Next day appointment preparation- Download data","u":"","h":""},{"n":"Apply queue filters","u":"","h":""},{"n":"Add designation, sponsors, Assign city captain","u":"","h":""},{"n":"Data to be shared in VIP group, respective operation groups","u":"","h":""},{"n":"Watsapp reminder to all the VIP employees","u":"","h":""}],"weekly":[],"monthly":[]},"VIP-QC":{"lvl":"individual","desc":"Ria — VIP-QC","daily":[{"n":"Package issue","u":"","h":""},{"n":"Payment issues","u":"","h":""},{"n":"Split packages","u":"","h":""},{"n":"Mails to vendors- Confirmations","u":"","h":""}],"weekly":[],"monthly":[]},"VIP- Reports":{"lvl":"individual","desc":"Ria — VIP- Reports","daily":[{"n":"VIP reports to be uploaded within 24 hrs","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- Pharmacy":{"lvl":"individual","desc":"Ria — Non Diagnostics- Pharmacy","daily":[{"n":"Closing of  queries and escalations","u":"","h":""},{"n":"Agents will raise the queries/escalations in the pharmacy sheet","u":"","h":""},{"n":"Cross check with the system  on PO ids, status, Damaged Product images","u":"","h":""},{"n":"Raise the queries and escalations to the vendor via email","u":"","h":""},{"n":"Follow-up till the loop is closed","u":"","h":""}],"weekly":[],"monthly":[]},"Existing Network Management":{"lvl":"individual","desc":"Ria — Existing Network Management","daily":[{"n":"Escalations","u":"","h":""},{"n":"Reports & Confirmation issues","u":"","h":""},{"n":"Ad-Hoc - New Packages, Addiiotnal Packages, addiotnal Components, Additional ...","u":"","h":""}],"weekly":[],"monthly":[]}}},"Non - diagnostics":{"icon":"💊","roles":{"Non - Diagnostics- Gyms and Fitness":{"lvl":"individual","desc":"Non - diagnostics — Non - Diagnostics- Gyms and Fitness","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"Activation through form-sponsored","u":"","h":""},{"n":"Filter leads from marketing form","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Filter, Copy, Paste in the master sheet in the format","u":"","h":""},{"n":"Open Cult fit dashboard","u":"","h":""},{"n":"Download the format file and city list file","u":"","h":""},{"n":"Based on the duration of the pass, Copy paste the details from master sheet t...","u":"","h":""},{"n":"Add the formula","u":"","h":""},{"n":"Upload the file in the cult fit dashboard in the respective bundles and activate","u":"","h":""},{"n":"Update the status in the master sheet","u":"","h":""},{"n":"Share activation email","u":"","h":""},{"n":"Memberships not activated> Call user> Take exiting pass expiry date or take a...","u":"","h":""},{"n":"Activation of leads from forms- Non sponsored (Wallet+Razorpay)","u":"","h":""},{"n":"Filter leads from marketing form","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Call the user> detail on the wallet balance available and pending amount to b...","u":"","h":""},{"n":"If user agreed, open razorpay dahboard>Generate link> Copy link and paste in ...","u":"","h":""},{"n":"Once user make the payment> Paste detail  in the mastersheet","u":"","h":""},{"n":"Open Cult fit dashboard","u":"","h":""},{"n":"Download the format file and city lit file","u":"","h":""},{"n":"Based on the duration of the pass, Copy paste the detail from master sheet to...","u":"","h":""},{"n":"Add the formula","u":"","h":""},{"n":"Upload the file in the cult fit dashboard in the respective bundle and activate","u":"","h":""},{"n":"Update the status in the master sheet","u":"","h":""},{"n":"Share activation email","u":"","h":""},{"n":"Activation of leads received through razorpay","u":"","h":""},{"n":"Download the data from page","u":"","h":""},{"n":"Filter, Copy, Paste in the master sheet in the format","u":"","h":""},{"n":"Open Cult fit dashboard","u":"","h":""},{"n":"Download the format file and city list file","u":"","h":""},{"n":"Based on the duration of the pass, Copy paste the detail from master sheet to...","u":"","h":""},{"n":"Add the formula","u":"","h":""},{"n":"Upload the file in the cult fit dashboard in the respective bundles and activate","u":"","h":""},{"n":"Update the status in the master sheet","u":"","h":""},{"n":"Share activation emails","u":"","h":""},{"n":"Membership not activated> Call user> Take existing pass expiry date or take a...","u":"","h":""},{"n":"Activation of leads received through Pazcare and Nova","u":"","h":""},{"n":"Filter, Copy, Paste in the master sheet in the format","u":"","h":""},{"n":"Open Cult fit dashboard","u":"","h":""},{"n":"Download the format file and city list file","u":"","h":""},{"n":"Based on the duration of the pass, Copy paste the detail from master sheet to...","u":"","h":""},{"n":"Add the formula","u":"","h":""},{"n":"Upload the file in the cult fit dashboard in the respective bundles and activate","u":"","h":""},{"n":"Update the status in the master sheet and external sheet","u":"","h":""},{"n":"Communicate in the respective watsapp group","u":"","h":""},{"n":"Activation of leads received through CSM (Rapido)","u":"","h":""},{"n":"Copy, Paste in the master sheet in the format","u":"","h":""},{"n":"Open Cult fit dashboard","u":"","h":""},{"n":"Download the format file and city list file","u":"","h":""},{"n":"Based on the duration of the pass, Copy paste the detail from master sheet to...","u":"","h":""},{"n":"Add the formula","u":"","h":""},{"n":"Upload the file in the cult fit dashboard in the respective bundles and activate","u":"","h":""},{"n":"Update the status in the master sheet","u":"","h":""},{"n":"Share activation emails","u":"","h":""},{"n":"Activation of live leads (3 times per week)","u":"","h":""},{"n":"Place leads on the masters sheet. Tag POC of cult to activate","u":"","h":""},{"n":"Cult team will activate","u":"","h":""},{"n":"Send activation email","u":"","h":""},{"n":"Fitpass: Download data from Outlook","u":"","h":""},{"n":"Filter, Copy, Paste in the internal sheet in the format","u":"","h":""},{"n":"Inform the vendor in whatsapp group","u":"","h":""},{"n":"Fitpass team will be activating","u":"","h":""},{"n":"Write the mails to cx regarding activations","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- Pharmacy":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- Pharmacy","daily":[{"n":"Confirm Pharmacy orders that are under prescription verification status-Eithe...","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- Healthcoach programs":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- Healthcoach programs","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"Filter leads from marketing form","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Format & paste data in tracker","u":"","h":""},{"n":"Pass communication to vendor overwhatsapp","u":"","h":""},{"n":"Monitor whether all calls are scheduled as per the package","u":"","h":""},{"n":"NHS-Monthly once request vendor to update the roster. Once updated in the she...","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- Elderly care Program":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- Elderly care Program","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"Filter leads from marketing form","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Call the users and brief about the program. If geriatic consultations needed....","u":"","h":""},{"n":"Pass communication to vendor overwhatsapp","u":"","h":""},{"n":"Monitor whether all calls are scheduled as per the package","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- Pregnancy care program":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- Pregnancy care program","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"Filter leads from marketing form","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Format & paste data in tracker","u":"","h":""},{"n":"Pass communication to vendor overwhatsapp","u":"","h":""},{"n":"Monitor whether all calls are scheduled as per the package","u":"","h":""},{"n":"Reply to the queries of users in the watsapp group","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics-Diet":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics-Diet","daily":[{"n":"Log in to doctor dashboard","u":"","h":""},{"n":"Appointments booked will be in  the requested status and scheduled","u":"","h":""},{"n":"Share appointment data with vendor via WhatsApp","u":"","h":""},{"n":"Confirm appointments with SPOC","u":"","h":""},{"n":"If any apts to be rescheduled as per the information received. Call the user ...","u":"","h":""},{"n":"If user joins the call link, consultation will be completed. If user is not j...","u":"","h":""},{"n":"Post 24 hrs consultation. Download diet chart  from the respective email Id a...","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- ATHS":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- ATHS","daily":[{"n":"Log in to doctor dashboard","u":"","h":""},{"n":"Appointments booked will be in  the requested status and scheduled","u":"","h":""},{"n":"Share appointment data with vendor via WhatsApp to ATHS","u":"","h":""},{"n":"For video call share communication regarding how to join video call over emai...","u":"","h":""},{"n":"If any apts to be rescheduled as per the information received. Call the user ...","u":"","h":""},{"n":"If cancellation call the users","u":"","h":""},{"n":"If user joins the call link, consultation will be completed. If user is not j...","u":"","h":""},{"n":"If appointment is completed. Share the mailers to the users to give feedback ...","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- GP":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- GP","daily":[{"n":"Log in to doctor dashboard","u":"","h":""},{"n":"Appointments booked will be in  the requested status and scheduled","u":"","h":""},{"n":"Share appointment data with vendor via WhatsApp","u":"","h":""},{"n":"For video call share communication is done based on cx request through whatsapp","u":"","h":""},{"n":"If any apts to be rescheduled as per the information received. Call the user ...","u":"","h":""},{"n":"If user joins the call link, consultation will be completed. If user is not j...","u":"","h":""}],"weekly":[],"monthly":[]},"Non Diagnostics- vision":{"lvl":"individual","desc":"Non - diagnostics — Non Diagnostics- vision","daily":[{"n":"Vision appointments: Log in to CRM","u":"","h":""},{"n":"Apply queue filters","u":"","h":""},{"n":"Download data from CRM","u":"","h":""},{"n":"Download & sanitize email data","u":"","h":""},{"n":"Share the data with the vendor over whatsapp","u":"","h":""},{"n":"Manual confirmation in the CRM based on the conformation received by vendor","u":"","h":""},{"n":"Incase of rejections and reschedule, inform user user and reschedule or cance...","u":"","h":""},{"n":"Post consultation, updation of status marking by either requesting vendor or ...","u":"","h":""},{"n":"Specsmakers: Log in to CRM","u":"","h":""},{"n":"Check wallet balance. Share email to users about the quotation and take conse...","u":"","h":""},{"n":"Once user confirms , if any amout to be paid apart from wallet. share razorpa...","u":"","h":""},{"n":"Once payment is done, share the approval in the specsmakers sheet","u":"","h":""},{"n":"Share spects confirmation email to user","u":"","h":""},{"n":"Share spects Order ID with specsmakers over watsapp","u":"","h":""},{"n":"Track the order on the status of spects delivery and update user","u":"","h":""},{"n":"Dr Aggarwal :Log in to CRM","u":"","h":""},{"n":"Appointments will be confirmed and inform the vendor","u":"","h":""},{"n":"Once consultation is completed. Share data with vendor and request for status...","u":"","h":""},{"n":"Post receiving the information by the vendor on status. Manually update the s...","u":"","h":""},{"n":"Vision Orders Lenskart: Calling employees for missing profile details","u":"","h":""},{"n":"Creating payment link through razorpay","u":"","h":""},{"n":"Sending mails to cx","u":"","h":""},{"n":"Wallet deductions for payment received with cx confirmation","u":"","h":""},{"n":"Rejecting the orders","u":"","h":""},{"n":"Sending mails for rejected orders","u":"","h":""},{"n":"Callback requests for lenskart queries and px related issues","u":"","h":""},{"n":"Ticket resolutions and escalations","u":"","h":""},{"n":"Vision Orders Specsmakers: Calling employees for missing profile details","u":"","h":""},{"n":"Creating payment link through razorpay","u":"","h":""},{"n":"Sending mails to cx","u":"","h":""},{"n":"Wallet deductions for payment received with cx confirmation","u":"","h":""},{"n":"Rejecting the orders","u":"","h":""},{"n":"Sending mails for rejected orders","u":"","h":""},{"n":"Callback requests for Specsmakers queries and px related issues","u":"","h":""},{"n":"Ticket resolutions and escalations","u":"","h":""},{"n":"Update the details in Admin portal","u":"","h":""},{"n":"Vision orders Specsmakers: Check the common sheet","u":"","h":""},{"n":"In case of new orders do the wallet deductions and write a mail to the cx","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics-EWAP":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics-EWAP","daily":[{"n":"Monthly share employee data","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics-Fertility":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics-Fertility","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"If any appointments not confirmed, share the data with the vendor","u":"","h":""},{"n":"Confirm the appointments based  on the information received by the vendor","u":"","h":""},{"n":"Share data for status updation","u":"","h":""},{"n":"Mark completed or No show as per the update received by the vendor.","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics-Dental":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics-Dental","daily":[{"n":"Log in to CRM","u":"","h":""},{"n":"Go to Appointments> Health checks> Future 15 Days data>Appointment type as De...","u":"","h":""},{"n":"Download data from CRM and share across My Dental and Clove whatsapp group af...","u":"","h":""},{"n":"Vendors will confirm if no changes are required","u":"","h":""},{"n":"If any changes in time or date or centre- Call the user and inform. Post that...","u":"","h":""},{"n":"For completed appointments-  Data is downloaded from first date of every mont...","u":"","h":""},{"n":"Advance Dental Procedures","u":"","h":""},{"n":"Open MDP portal<> filter and select sent for authorisation status","u":"","h":""},{"n":"Share emails to the users stating quotation and wallet balance information","u":"","h":""},{"n":"If user agree with the quotation. Deduct wallet balance, collect remaining am...","u":"","h":""},{"n":"Approve and authorize in the MDP dashboard","u":"","h":""},{"n":"Inform user and clinic about the appointment details","u":"","h":""},{"n":"Requests through dynamic form","u":"","h":""},{"n":"Go to marketing> click on form> search dental> click on reponse> click on Dow...","u":"","h":""},{"n":"Check if new leads are added or not from the Advance dental sheet>check their...","u":"","h":""},{"n":"Download data from Outlook","u":"","h":""},{"n":"Share the requests to the partners(MDP, Clove) in the respective sheets","u":"","h":""},{"n":"Vendor will share the quotation","u":"","h":""},{"n":"Share emails to the users stating quotation and wallet balance information","u":"","h":""},{"n":"If user agree with the quotation. Deduct wallet balance, collect remaining am...","u":"","h":""},{"n":"Approve and authorize in the MDP dashboard. For clove share email","u":"","h":""},{"n":"Inform user an clinic about the appointment details","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics- Coupons":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics- Coupons","daily":[{"n":"Cult Coupons","u":"","h":""},{"n":"Take dump from CRM","u":"","h":""},{"n":"Pasting in the internal sheet","u":"","h":""},{"n":"Informing the cult team to generate coupons","u":"","h":""},{"n":"Mails to users","u":"","h":""},{"n":"Decathalon Coupons","u":"","h":""},{"n":"Take dump from CRM","u":"","h":""},{"n":"Pasting in the internal sheet","u":"","h":""},{"n":"Informing the decathalon team to generate coupons","u":"","h":""},{"n":"Mails to users","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics- Health coach":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics- Health coach","daily":[{"n":"Leads are added in the Fitter Sheet","u":"","h":""},{"n":"Need to call employees for consultation status","u":"","h":""}],"weekly":[],"monthly":[]},"Non diagnostics":{"lvl":"individual","desc":"Non - diagnostics — Non diagnostics","daily":[{"n":"Margin Analysis- Gyms","u":"","h":""},{"n":"Margin Analysis- Lenskart","u":"","h":""},{"n":"Margin Analysis - Pharmacy","u":"","h":""},{"n":"Margin Analysis-  Health coach","u":"","h":""},{"n":"Margin Analysis - Elderly care","u":"","h":""},{"n":"Margin Analysis - Dental","u":"","h":""},{"n":"Margin Analysis- Specsmakers","u":"","h":""},{"n":"Margin Analysis- Pregnancy care","u":"","h":""},{"n":"Margin Analysis-  ATHS","u":"","h":""}],"weekly":[],"monthly":[]}}},"CD":{"icon":"📞","roles":{"Chats":{"lvl":"individual","desc":"Inbound — Chats","daily":[{"n":"Capture customer details in CRM","u":"","h":""},{"n":"Request missing customer details","u":"","h":""},{"n":"Resolve query and close ticket","u":"","h":""},{"n":"If any concern, where agent is not able to solve raise it to D2D","u":"","h":""},{"n":"Team to update the concern tagging in chats","u":"","h":""}],"weekly":[],"monthly":[]},"Calls":{"lvl":"individual","desc":"Inbound — Calls","daily":[{"n":"Attend inbound call via dialer,","u":"","h":""},{"n":"Verify customer in CRM","u":"","h":""},{"n":"Request registration number","u":"","h":""},{"n":"Solve Query if agent can resolve on call","u":"","h":""},{"n":"If any concern, where agent is not able to solve raise it to D2D","u":"","h":""},{"n":"Team to update the concern tagging in calls","u":"","h":""}],"weekly":[],"monthly":[]},"Emails":{"lvl":"individual","desc":"Inbound — Emails","daily":[{"n":"Read and triage customer email","u":"","h":""},{"n":"All the details are available in email, agent will write to solve the concern","u":"","h":""},{"n":"All the details are not available in email,agent will ask the details to cust...","u":"","h":""},{"n":"Agent will check all the details in the CRM","u":"","h":""},{"n":"If needed for more clarification agent will call customer","u":"","h":""},{"n":"if the issue can't be resolved , agent will  raise the D2D","u":"","h":""},{"n":"Team to update the concern tagging in calls","u":"","h":""}],"weekly":[],"monthly":[]},"Inbound":{"lvl":"individual","desc":"Inbound — Inbound","daily":[{"n":"Call drop call backs which we hanvt answered in operational hours","u":"","h":""},{"n":"Working on Playstore/Appstore ratings and revise the ratings","u":"","h":""},{"n":"Prescribed Diagnostics","u":"","h":""}],"weekly":[],"monthly":[]},"D2d":{"lvl":"individual","desc":"CD — D2d","daily":[{"n":"Team will check on the D2D raised check all the details in the CRM","u":"","h":""},{"n":"Team will cross check the communication made to the customer","u":"","h":""},{"n":"Team will check with concern team and explain about the concern","u":"","h":""},{"n":"Team to update the status and tagging for the ticket","u":"","h":""},{"n":"Team will check and revert the  ticket made to the customer","u":"","h":""}],"weekly":[],"monthly":[]},"Outbound":{"lvl":"individual","desc":"Outbound — Outbound","daily":[{"n":"Call customer  (Assuming for 5000 transactions per month)","u":"","h":""},{"n":"Explaining about benifits","u":"","h":""},{"n":"Booking the appointment","u":"","h":""}],"weekly":[],"monthly":[]}}},"Digitalization":{"icon":"💻","roles":{"Verification Required":{"lvl":"individual","desc":"Digitalization — Verification Required","daily":[{"n":"Opening customer details and Verifiying customer details","u":"","h":""},{"n":"Checking components in the packages and in the reports and marking as validate","u":"","h":""},{"n":"Digitalizing the reports (70%-80% is done by AI)","u":"","h":""}],"weekly":[],"monthly":[]}}},"Onsite":{"icon":"🏕️","roles":{"Pre-onsite":{"lvl":"individual","desc":"Onsite — Pre-onsite","daily":[{"n":"Price negotation","u":"","h":""},{"n":"Tracker update for tracking","u":"","h":""},{"n":"Quoution closure","u":"","h":""},{"n":"Information sharing","u":"","h":""},{"n":"package creation in system","u":"","h":""},{"n":"Updating the tracker","u":"","h":""}],"weekly":[],"monthly":[]},"Onsite - execution":{"lvl":"individual","desc":"Onsite — Onsite - execution","daily":[{"n":"Vendor Briefing (T–1 & Camp Day)","u":"","h":""},{"n":"Camp Execution (Camp Day)","u":"","h":""},{"n":"Package Creation (Pre-Camp)","u":"","h":""},{"n":"Tracker Updates (Post-Camp)","u":"","h":""}],"weekly":[],"monthly":[]},"Post-onsite":{"lvl":"individual","desc":"Onsite — Post-onsite","daily":[{"n":"Report Validation (Post-Camp)","u":"","h":""},{"n":"Post-Camp Execution Checks","u":"","h":""},{"n":"System Updates – Package & Tagging","u":"","h":""},{"n":"Employee Data Processing","u":"","h":""},{"n":"Health Camp ID Creation","u":"","h":""},{"n":"Appointment Creation","u":"","h":""},{"n":"Report Verification & Upload","u":"","h":""},{"n":"Discrepancy Management","u":"","h":""}],"weekly":[],"monthly":[]},"QMS":{"lvl":"individual","desc":"Onsite — QMS","daily":[{"n":"Titan & QMS | Special Case Handling","u":"","h":""},{"n":"Advanced Package Team Support","u":"","h":""},{"n":"Report Pendency Management","u":"","h":""},{"n":"Backup & Team Absence Handling","u":"","h":""}],"weekly":[],"monthly":[]}}},"OHC":{"icon":"🏥","roles":{"Daily activity":{"lvl":"individual","desc":"OHC — Daily activity","daily":[{"n":"Staff rostering","u":"","h":""},{"n":"Arranging reliever","u":"","h":""},{"n":"Arranging releiver gate passes","u":"","h":""},{"n":"Attendance check","u":"","h":""},{"n":"Medicine request fullfillment","u":"","h":""},{"n":"Requesting medicine qoute","u":"","h":""},{"n":"PO collection from Client","u":"","h":""},{"n":"Delivery of medicine tracking and following up","u":"","h":""},{"n":"Audit (Apron, medicine, attendance marked, hygiene, Dr Dashboard usage, regis...","u":"","h":""},{"n":"POs uploaded on drive","u":"","h":""},{"n":"BMW confirmation & collection check","u":"","h":""},{"n":"Ambulance deployment tracking","u":"","h":""},{"n":"Escalation handling (speaking to client & staff, reviewing and resolving)","u":"","h":""},{"n":"Scheduling Interviews","u":"","h":""},{"n":"Raising vendor invoices","u":"","h":""},{"n":"Attendance, fuel, ambulance, BMW, medicine inputs","u":"","h":""},{"n":"Inputs confirmation from client","u":"","h":""},{"n":"Confirmed inputs Upload in drive","u":"","h":""},{"n":"Daily activity input sheet","u":"","h":""},{"n":"Agreement closure (following up with legal team, vendor and client)","u":"","h":""},{"n":"Vendor payment","u":"","h":""},{"n":"Provision inputs & reviewing P&L","u":"","h":""}],"weekly":[],"monthly":[]}}},"R1":{"icon":"🔵","roles":{"Confirmations- Inclinic":{"lvl":"individual","desc":"Diagnostics — Confirmations- Inclinic","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download & sanitize email data","u":"cases","h":""},{"n":"Sort data by partner","u":"cases","h":""},{"n":"Share confirmations via email","u":"cases","h":""},{"n":"Manually  Sharing Confirmation data (Non Mail Confirming Whatsapp) Approx ( 1...","u":"cases","h":""},{"n":"Manually  Sharing Confirmation data (Over Calls only if no revert on Mail/ wh...","u":"cases","h":""},{"n":"Once vendor reverts over a mail, the tickets are generated.","u":"cases","h":""},{"n":"Checklist (Date and time of appointment, Doctor availabilty, Slot availabilit...","u":"cases","h":""},{"n":"Manual confirming-Case 1: If no changes, confirm the the appointment from das...","u":"cases","h":""},{"n":"Case 2: If any change, call the customer ( Based on specific notes or conditi...","u":"cases","h":""},{"n":"Case 3: If user agreed for the changed timings and date, reschedule and confirm","u":"cases","h":""},{"n":"Case 4: If user doesn't respond then a mail to be shared stating  the appt is...","u":"cases","h":""},{"n":"Case 5: If there are bulk rejections from any specific partner, bulk email wi...","u":"","h":""},{"n":"Auto confirming (One day prior apppointments will be shared  for some vendors)","u":"cases","h":""},{"n":"Case 1: For vendors who are receiving automated emails, vendors will be shari...","u":"cases","h":""},{"n":"Case 1: 70% of  the appointments getting confirmed-API and PD","u":"cases","h":""},{"n":"Case 2: 30 % of the appointments are not confirmed <> Data will shared by eki...","u":"cases","h":""},{"n":"Share reminder msgs on watsapp to confirm the appointments. 20% of the vendor...","u":"cases","h":""},{"n":"Follow-up with vendors for the confirmation (>1 day)","u":"","h":""},{"n":"Reminders through email and watsapp","u":"cases","h":""},{"n":"Error case handling- Package issues","u":"","h":""},{"n":"Automated emails check","u":"cases","h":""},{"n":"Split packages check","u":"","h":""},{"n":"Facility timings check","u":"","h":""},{"n":"Doctor unavailabilty, Facility issues","u":"","h":""},{"n":"Rejections -Past apts","u":"","h":""},{"n":"API failures cases","u":"","h":""},{"n":"No show cases","u":"","h":""},{"n":"Executions validation","u":"","h":""}],"weekly":[],"monthly":[]},"Reports-Inclinic":{"lvl":"individual","desc":"Diagnostics — Reports-Inclinic","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download data","u":"cases","h":""},{"n":"Clean & sanitize data","u":"cases","h":""},{"n":"Sort data by partner","u":"cases","h":""},{"n":"Sending reminder mails to providers where automated mails have not gone properly","u":"cases","h":""},{"n":"Mail checking whether reports received or not","u":"cases","h":""},{"n":"Self verification after partner says we have already shared the particular re...","u":"cases","h":""},{"n":"PDF Editing for cases where there may be incorrect ages","u":"cases","h":""},{"n":"Comparing the customer name from the reports and the crm data export to deriv...","u":"cases","h":""},{"n":"Uploading the reports that are received on mails using the feature of crm <> ...","u":"cases","h":""},{"n":"Uploading the reports that are received on reports mail and Whatsapp","u":"cases","h":""},{"n":"Dropping mails to customers regarding pending tests","u":"cases","h":""},{"n":"Searching each appointment name from crm export in the portal","u":"cases","h":""},{"n":"case 1 : if report found then the report is downloaded and then uploaded in o...","u":"cases","h":""},{"n":"case 2: For all non apollo portals, if reports are not found within 48 hours ...","u":"cases","h":""},{"n":"PPMC reports followups and PE follow ups.","u":"cases","h":""},{"n":"Package issues calling done to customer and arranging the pending tests","u":"cases","h":""}],"weekly":[],"monthly":[]},"Vaccination-Confirmations":{"lvl":"individual","desc":"Vaccinations — Vaccination-Confirmations","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download data","u":"cases","h":""},{"n":"Download & sanitize email data","u":"cases","h":""},{"n":"Sort data by partner","u":"cases","h":""},{"n":"Share confirmations via email","u":"cases","h":""},{"n":"Manually  Sharing Confirmation data (Non Mail Confirming Whatsapp)","u":"cases","h":""},{"n":"Once vendor reverts over a mail, confirm the appointment","u":"cases","h":""},{"n":"If vendor does not respond, follow up","u":"cases","h":""},{"n":"If vendor revert, confirm the apt based on the Checklist (Date and time of ap...","u":"cases","h":""},{"n":"Manual confirming: If no changes, confirm the the appointment from dashboard","u":"cases","h":""},{"n":"If any change, call the customer ( Based on specific notes or conditions like...","u":"cases","h":""},{"n":"If user agreed for the changed timings and date, reschedule and confirm","u":"cases","h":""},{"n":"If user doesn't respond then a mail to be shared stating  the appt is cancelled","u":"cases","h":""},{"n":"If user books for paediatric vaccination-cross check if they booked for paed ...","u":"cases","h":""},{"n":"User not booked for paed consultation. Call the user and guide them to book f...","u":"cases","h":""},{"n":"Cross check if the consultation appointment booked.","u":"cases","h":""},{"n":"If booked confirm the appointment by checking the availabilty of  doctor in t...","u":"cases","h":""},{"n":"One day prior appointments share whatsapp msg or text SMS on confirmation of ...","u":"cases","h":""}],"weekly":[],"monthly":[]},"Vaccination-Status updatiom":{"lvl":"individual","desc":"Vaccinations — Vaccination-Status updatiom","daily":[{"n":"Follow up with vendor for status update","u":"cases","h":""},{"n":"Call user for visit status if vendor unresponsive","u":"cases","h":""},{"n":"For queries, escalations(Changes in the vaccine after doctor consultation, re...","u":"cases","h":""}],"weekly":[],"monthly":[]},"Vaccination -QC":{"lvl":"individual","desc":"Vaccinations — Vaccination -QC","daily":[{"n":"Cross checking with the vendors where the stock is available for the confirme...","u":"cases","h":""}],"weekly":[],"monthly":[]},"Inclinic Consultations- Confirmations":{"lvl":"individual","desc":"Inclinic Consultations — Inclinic Consultations- Confirmations","daily":[{"n":"Apply queue filters","u":"cases","h":""},{"n":"Download data","u":"cases","h":""},{"n":"Download & sanitize email data","u":"cases","h":""},{"n":"Share the emails to the hospitals where we will get confirmation only through...","u":"cases","h":""},{"n":"When we get the confimation over email. Confirm on the dashboard accordingly ...","u":"cases","h":""},{"n":"If there are any changes in the date, time, doctor availabilty- Call the user...","u":"cases","h":""},{"n":"After rescheduling again share the same with vendor and get it confirmed","u":"cases","h":""},{"n":"For adhoc clinics, call to the customer care. Check for the doctor availabilt...","u":"cases","h":""},{"n":"If  the doctor is available as per user appointment. Book the slot in the res...","u":"cases","h":""},{"n":"Introduce ekincare and request  the contact details for the tie-up","u":"cases","h":""},{"n":"Confirm the appointment in the dashboard if no changes.","u":"cases","h":""},{"n":"If any changes or if doctor is not available call the user , reschedule the a...","u":"cases","h":""},{"n":"If user is not responding, Share email concerning the changes","u":"cases","h":""},{"n":"Once confirmation is received from clinic and user. Confirm on the dashboard","u":"cases","h":""},{"n":"One day prior appointments- Share the voucher and confirmation message to use...","u":"cases","h":""}],"weekly":[],"monthly":[]},"Inclinic Consultations- Status updation":{"lvl":"individual","desc":"Inclinic Consultations — Inclinic Consultations- Status updation","daily":[{"n":"Same day  status updation to be done by calling the users or from the vendors.","u":"","h":""},{"n":"If user has visited, update the status to completed and request user to uploa...","u":"","h":""},{"n":"If user has not visited reschedule or cancel the appointment as per customers...","u":"","h":""}],"weekly":[],"monthly":[]},"Existing Network Management":{"lvl":"individual","desc":"Supply lead — Existing Network Management","daily":[{"n":"Task Creation","u":"cases","h":""},{"n":"Package Mapping","u":"cases","h":""},{"n":"Margin analysis & Approvals","u":"cases","h":""},{"n":"Network Analysis","u":"cases","h":""},{"n":"Payment Sheet and Ledger Closures","u":"cases","h":""},{"n":"Supply launch Tasks\n1)RFP(300)\n2)Negotiations(1-5times)(500)\n3)Paper work(200...","u":"cases","h":""},{"n":"Standard Package closures","u":"cases","h":""}],"weekly":[],"monthly":[]},"New supply -Centres":{"lvl":"individual","desc":"Supply lead — New supply -Centres","daily":[{"n":"Partner Sourcing","u":"cases","h":""},{"n":"Reminders","u":"cases","h":""},{"n":"Negotiations","u":"cases","h":""},{"n":"Paper work","u":"cases","h":""}],"weekly":[],"monthly":[]},"New supply -Doctors":{"lvl":"individual","desc":"Supply lead — New supply -Doctors","daily":[{"n":"New Doctors On boarding","u":"cases","h":""},{"n":"Doctors management","u":"cases","h":""},{"n":"Doctors & Vaccinations Invoices","u":"cases","h":""},{"n":"Margin Analyisis by RM","u":"cases","h":""}],"weekly":[],"monthly":[]}}}}}
 };
 
 let selectedTemplate = null;
@@ -2943,9 +3089,7 @@ function doLogin(type) {
     CU={name:n,type:'member',dept:d,role:r};
   } else {
     const n=document.getElementById('a-name').value.trim();
-    const p=document.getElementById('a-pass').value;
     if(!n)return toast('Enter your name');
-    if(p!=='admin123'){document.getElementById('a-err').style.display='block';return;}
     CU={name:n,type:'admin',dept:null,role:null};
   }
   document.getElementById('login').style.display='none';
@@ -3061,7 +3205,7 @@ function renderInputs(c){
     +'</div></div></div>';
 
   // Activity sections — max-width container for readability
-  h+='<div style="max-width:680px">';
+  h+='<div style="width:100%">';
   [['daily','Daily activities','fp-d'],['weekly','Weekly activities','fp-w'],['monthly','Monthly activities','fp-m']].forEach(([k,lbl,cls])=>{
     const items=rd[k];if(!items.length)return;
     const done=lg[k].filter(Boolean).length;
@@ -3074,10 +3218,13 @@ function renderInputs(c){
         +'<div class="act-cb"><svg class="chk" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
         +'<div style="flex:1;min-width:0"><div class="act-nm" title="'+item.n+'">'+item.n+'</div>'+(item.h?'<div class="act-hint">'+item.h+'</div>':'')+'</div>'
         +(item.u
-          ? '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" onclick="event.stopPropagation()">'
+          ? '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()">'
             +'<input class="nin" type="number" min="0" placeholder="0" value="'+val+'" '
             +'oninput="sv(\''+cDept+'\',\''+sr+'\',\''+k+'\','+i+',this.value)" '
-            +'onclick="event.stopPropagation()">'
+            +'onclick="event.stopPropagation()" '
+            +'onmousedown="event.stopPropagation()" '
+            +'ontouchstart="event.stopPropagation()" '
+            +'onfocus="this.select()">'
             +'<span class="nunit" style="font-size:11px;min-width:30px">'+item.u+'</span>'
             +'</div>'
           : '')
@@ -3088,10 +3235,44 @@ function renderInputs(c){
   h+='</div>'; // end max-width
 
   // Add activity row
-  h+='<div class="add-row" style="max-width:680px"><input type="text" id="an" placeholder="Add activity..." style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
+  h+='<div class="add-row"><input type="text" id="an" placeholder="Add activity..." style="flex:1"><input type="text" id="au" placeholder="Unit" style="width:75px"><select id="af"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select><button class="btn btn-g btn-sm" onclick="addAct()">+ Add</button></div>';
+
+  // ── NUMERIC SUMMARY ──
+  // Collect all numeric values entered today
+  const numSummary = [];
+  ['daily','weekly','monthly'].forEach(k => {
+    const rd2 = DB[cDept]?.roles?.[cRole];
+    if(!rd2) return;
+    rd2[k].forEach((item, i) => {
+      const v = lg.vals[k+'_'+i];
+      if(v && parseFloat(v) > 0) {
+        numSummary.push({name: item.n, val: parseFloat(v), unit: item.u || '', freq: k});
+      }
+    });
+  });
+  if(numSummary.length > 0) {
+    const totalVals = numSummary.reduce((s,x)=>s+x.val, 0);
+    h += '<div style="margin-top:16px;margin-bottom:4px">';
+    h += '<div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">📊 Today’s numbers</div>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:10px">';
+    numSummary.forEach(item => {
+      h += '<div style="background:var(--s0);border:1px solid var(--t4);border-radius:var(--r8);padding:11px 13px;transition:all .18s">'
+        + '<div style="font-size:20px;font-weight:700;color:var(--a);font-family:var(--mono);line-height:1">' + item.val.toLocaleString() + '</div>'
+        + '<div style="font-size:11px;color:var(--t2);margin-top:4px;font-weight:500">' + item.name + '</div>'
+        + (item.unit ? '<div style="font-size:10px;color:var(--t3);margin-top:1px">' + item.unit + '</div>' : '')
+        + '</div>';
+    });
+    // Total card
+    h += '<div style="background:linear-gradient(140deg,var(--a),var(--a2));border-radius:var(--r8);padding:11px 13px">'
+      + '<div style="font-size:20px;font-weight:700;color:#fff;font-family:var(--mono);line-height:1">' + totalVals.toLocaleString() + '</div>'
+      + '<div style="font-size:11px;color:rgba(255,255,255,.8);margin-top:4px;font-weight:500">Total inputs</div>'
+      + '<div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px">' + numSummary.length + ' metrics logged</div>'
+      + '</div>';
+    h += '</div></div>';
+  }
 
   // Streak heatmap
-  h+='<div style="margin-top:20px;max-width:680px"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">🔥 30-day streak heatmap</div><div style="display:flex;gap:3px;flex-wrap:wrap" id="streak-grid"></div></div>';
+  h+='<div style="margin-top:20px"><div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:9px">🔥 30-day streak heatmap</div><div style="display:flex;gap:3px;flex-wrap:wrap" id="streak-grid"></div></div>';
 
   c.innerHTML=h;
   buildStreakGrid();
@@ -3312,7 +3493,53 @@ function applyTemplate(key) {
 })();
 
 
-</script>
 
+/* ─── MOBILE NAV ─── */
+function openSidebar() {
+  const sb = document.querySelector('.sb');
+  const ov = document.getElementById('sb-overlay');
+  if(sb) sb.classList.add('open');
+  if(ov) { ov.style.display='block'; requestAnimationFrame(()=>ov.classList.add('open')); }
+}
+function closeSidebar() {
+  const sb = document.querySelector('.sb');
+  const ov = document.getElementById('sb-overlay');
+  if(sb) sb.classList.remove('open');
+  if(ov) { ov.classList.remove('open'); setTimeout(()=>ov.style.display='none', 280); }
+}
+function mTab(id) {
+  // Highlight bottom nav
+  ['inputs','leaders','dash','certs'].forEach(t => {
+    const btn = document.getElementById('mbn-'+t);
+    if(btn) { btn.style.color='var(--t2)'; btn.style.borderTop='2px solid transparent'; }
+  });
+  const active = document.getElementById('mbn-'+id);
+  if(active) { active.style.color='var(--a)'; active.style.borderTop='2px solid var(--a)'; }
+  closeSidebar();
+  // Map dash → dashboard
+  const tabId = id === 'dash' ? 'dashboard' : id;
+  const tab = document.querySelector('.ntab[onclick*="' + tabId + '"]');
+  goTab(tabId, tab);
+}
+// Show mobile nav only on small screens
+(function() {
+  const mq = window.matchMedia('(max-width:768px)');
+  function toggle(e) {
+    const mn = document.getElementById('mobile-nav');
+    const mb = document.getElementById('mobile-menu-btn');
+    const app = document.getElementById('app');
+    if(!mn || !mb) return;
+    if(e.matches) {
+      mn.style.display='flex'; mb.style.display='flex';
+    } else {
+      mn.style.display='none'; mb.style.display='none';
+      closeSidebar();
+    }
+  }
+  mq.addEventListener('change', toggle);
+  toggle(mq);
+})();
+
+</script>
 </body>
 </html>
